@@ -1,5 +1,30 @@
 {
-  "itemGroup.manaitapp": "Example Mod Tab",
-  "block.manaitapp.example_block": "Example Block",
-  "item.manaitapp.example_item": "Example Item"
+  "itemGroup.manaitapp": "Manaita++",
+  "block.manaitapp.manaita_furnace_wood": "wood Furnace",
+  "block.manaitapp.manaita_furnace_stone": "stone Furnace",
+  "block.manaitapp.manaita_furnace_iron": "iron Furnace",
+  "block.manaitapp.manaita_furnace_gold": "gold Furnace",
+  "block.manaitapp.manaita_furnace_diamond": "diamond Furnace",
+  "block.manaitapp.manaita_furnace_mtk": "MTK Furnace",
+
+  "block.manaitapp.manaita_wood": "wood Manaita",
+  "block.manaitapp.manaita_stone": "stone Manaita",
+  "block.manaitapp.manaita_iron": "iron Manaita",
+  "block.manaitapp.manaita_gold": "gold Manaita",
+  "block.manaitapp.manaita_diamond": "diamond Manaita",
+  "block.manaitapp.manaita_mtk": "MTK Manaita",
+
+  "item.manaitapp.manaita_origin": "manaita Origin",
+  "item.manaitapp.crushed_manaita": "crushed Manaita",
+  "item.manaitapp.manaita_axe": "manaita Axe",
+  "item.manaitapp.manaita_paxel": "manaita paxel",
+  "item.manaitapp.manaita_pickaxe": "manaita Pickaxe",
+  "item.manaitapp.manaita_shovel": "manaita Shovel",
+  "item.manaitapp.manaita_hoe": "manaita Hoe",
+  "item.manaitapp.manaita_sword": "manaita Sword",
+  "item.manaitapp.manaita_bow": "manaita Bow",
+  "item.manaitapp.manaita_helmet": "manaita Helmet",
+  "item.manaitapp.manaita_chestplate": "manaita Chestplate",
+  "item.manaitapp.manaita_leggings": "manaita leggings",
+  "item.manaitapp.manaita_boots": "manaita boots"
 }

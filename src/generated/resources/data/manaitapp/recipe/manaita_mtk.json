@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "manaitapp:manaita_origin"
+    },
+    "C": {
+      "item": "manaitapp:manaita_diamond"
+    }
+  },
+  "pattern": [
+    "#C#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "manaitapp:manaita_mtk"
+  }
+}

@@ -6,6 +6,7 @@ import com.takoy3466.manaitapp.block.blockEntity.ManaitaFurnaceBlockEntity;
 import com.takoy3466.manaitapp.init.ManaitaTiers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +21,7 @@ public class BlockManaitaFurnace {
         }
 
         @Override
-        protected @NotNull MapCodec<? extends AbstractFurnaceBlock> codec() {
+        protected @NotNull MapCodec<? extends AbstractBlockManaitaFurnace> codec() {
             return CODEC;
         }
 
@@ -38,7 +39,7 @@ public class BlockManaitaFurnace {
         }
 
         @Override
-        protected @NotNull MapCodec<? extends AbstractFurnaceBlock> codec() {
+        protected @NotNull MapCodec<? extends AbstractBlockManaitaFurnace> codec() {
             return CODEC;
         }
 
@@ -56,7 +57,7 @@ public class BlockManaitaFurnace {
         }
 
         @Override
-        protected @NotNull MapCodec<? extends AbstractFurnaceBlock> codec() {
+        protected @NotNull MapCodec<? extends AbstractBlockManaitaFurnace> codec() {
             return CODEC;
         }
 
@@ -74,7 +75,7 @@ public class BlockManaitaFurnace {
         }
 
         @Override
-        protected @NotNull MapCodec<? extends AbstractFurnaceBlock> codec() {
+        protected @NotNull MapCodec<? extends AbstractBlockManaitaFurnace> codec() {
             return CODEC;
         }
 
@@ -92,7 +93,7 @@ public class BlockManaitaFurnace {
         }
 
         @Override
-        protected @NotNull MapCodec<? extends AbstractFurnaceBlock> codec() {
+        protected @NotNull MapCodec<? extends AbstractBlockManaitaFurnace> codec() {
             return CODEC;
         }
 
@@ -110,7 +111,7 @@ public class BlockManaitaFurnace {
         }
 
         @Override
-        protected @NotNull MapCodec<? extends AbstractFurnaceBlock> codec() {
+        protected @NotNull MapCodec<? extends AbstractBlockManaitaFurnace> codec() {
             return CODEC;
         }
 

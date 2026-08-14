@@ -1,8 +1,10 @@
 package com.takoy3466.manaitapp.event;
 
 import com.takoy3466.manaitapp.Manaitapp;
+import com.takoy3466.manaitapp.init.AttachmentsInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +13,9 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @EventBusSubscriber(modid = Manaitapp.MOD_ID)
@@ -64,9 +68,16 @@ public class ManaitaSubscribeEvent {
     }
 
     @SubscribeEvent
-    public static void onPlayerTickEvent(PlayerTickEvent.Pre event) {
+    public static void onEntityTickEvent(EntityTickEvent.Pre event) {
+        Entity entity = event.getEntity();
+        ManaitaEventHelper.attachmentExecute(entity, dataAttachment -> dataAttachment.onInvTick(entity.level(), entity));
+    }
+
+    @SubscribeEvent
+    public static void onAttackEntityEvent(AttackEntityEvent event) {
         Player player = event.getEntity();
-        ManaitaEventHelper.attachmentExecute(player, dataAttachment -> dataAttachment.onInvTick(player.level(), player));
+        Entity target = event.getTarget();
+        ManaitaEventHelper.attachmentExecute(player.getMainHandItem(), dataAttachment -> dataAttachment.onAttackEntity(player.level(), player, target));
     }
 
     @SubscribeEvent

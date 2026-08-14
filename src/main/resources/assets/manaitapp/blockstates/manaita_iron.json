@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down":  { "model": "manaitapp:block/manaita_iron", "x": 180 },
+    "facing=up":    { "model": "manaitapp:block/manaita_iron" },
+    "facing=north": { "model": "manaitapp:block/manaita_iron", "x": 90 },
+    "facing=south": { "model": "manaitapp:block/manaita_iron", "x": 90, "y": 180 },
+    "facing=west":  { "model": "manaitapp:block/manaita_iron", "x": 90, "y": 270 },
+    "facing=east":  { "model": "manaitapp:block/manaita_iron", "x": 90, "y": 90 }
+  }
+}

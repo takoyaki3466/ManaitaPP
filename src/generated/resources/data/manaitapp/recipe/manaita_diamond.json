@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "manaitapp:manaita_gold"
+    }
+  },
+  "pattern": [
+    "###CCC###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "manaitapp:manaita_diamond"
+  }
+}

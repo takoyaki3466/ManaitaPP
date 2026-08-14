@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.Block;
 import java.util.function.Supplier;
 
 public class BlocksInit {
-    public static final TieredDeferredRegister<ManaitaTier, Block> TIER_REGISTER = TieredDeferredRegister.createBlocks(Manaitapp.MOD_ID);
     public static final DoubleRegister.BlockRegister BLOCKS = DoubleRegister.createBlock(Manaitapp.MOD_ID);
 
     public static DoubleHolder.BlockHolder<BlockManaitaCrafting> MANAITA_WOOD = registerManaita(ManaitaTiers.WOOD);

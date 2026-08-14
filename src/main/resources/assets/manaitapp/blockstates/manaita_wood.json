@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "manaitapp:block/manaita_wood",
+      "x": 180
+    },
+    "facing=up": {
+      "model": "manaitapp:block/manaita_wood"
+    },
+    "facing=north": {
+      "model": "manaitapp:block/manaita_wood",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "manaitapp:block/manaita_wood",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "manaitapp:block/manaita_wood",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "manaitapp:block/manaita_wood",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

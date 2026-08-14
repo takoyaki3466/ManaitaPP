@@ -1,0 +1,30 @@
+{
+  "itemGroup.manaitapp": "Manaita++",
+  "block.manaitapp.manaita_furnace_wood": "木のかまど",
+  "block.manaitapp.manaita_furnace_stone": "石のかまど",
+  "block.manaitapp.manaita_furnace_iron": "鉄のかまど",
+  "block.manaitapp.manaita_furnace_gold": "金のかまど",
+  "block.manaitapp.manaita_furnace_diamond": "ダイヤモンドのかまど",
+  "block.manaitapp.manaita_furnace_mtk": "MTKのかまど",
+
+  "block.manaitapp.manaita_wood": "木のまな板",
+  "block.manaitapp.manaita_stone": "石のまな板",
+  "block.manaitapp.manaita_iron": "鉄のまな板",
+  "block.manaitapp.manaita_gold": "金のまな板",
+  "block.manaitapp.manaita_diamond": "ダイヤモンドのまな板",
+  "block.manaitapp.manaita_mtk": "MTKのまな板",
+
+  "item.manaitapp.manaita_origin": "まな板の素",
+  "item.manaitapp.crushed_manaita": "まな板の粉",
+  "item.manaitapp.manaita_axe": "まな板の斧",
+  "item.manaitapp.manaita_paxel": "まな板のパクセル",
+  "item.manaitapp.manaita_pickaxe": "まな板のツルハシ",
+  "item.manaitapp.manaita_shovel": "まな板のシャベル",
+  "item.manaitapp.manaita_hoe": "まな板のクワ",
+  "item.manaitapp.manaita_sword": "まな板の剣",
+  "item.manaitapp.manaita_bow": "まな板の弓",
+  "item.manaitapp.manaita_helmet": "まな板のヘルメット",
+  "item.manaitapp.manaita_chestplate": "まな板のチェストプレート",
+  "item.manaitapp.manaita_leggings": "まな板のレギンス",
+  "item.manaitapp.manaita_boots": "まな板のブーツ"
+}

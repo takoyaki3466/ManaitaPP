@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "manaitapp:manaita_origin"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "manaitapp:manaita_wood"
+  }
+}

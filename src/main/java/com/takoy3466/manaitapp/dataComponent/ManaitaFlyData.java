@@ -51,42 +51,27 @@ public class ManaitaFlyData extends AbstractManaitaData<ManaitaFlyData.FlySpeed>
     @SuppressWarnings("deprecation")
     @Override
     public boolean onLivingEquipmentChange(Level level, Entity entity, ItemStack currentStack, ItemStack previousStack) {
-        if (level == null || !(entity instanceof Player player)) {
-            return false;
-        }
-        if (level.isClientSide()) {
-            return false;
-        }
-        if (player.isCreative() || player.isSpectator()) {
-            return false;
-        }
-        // ManaitaFlyData (以後データと呼ぶ) が前後アイテムでそれぞれあるかチェック
-        boolean hasDataPrevious = previousStack.has(DataInit.FLY_DATA);
-        boolean hasDataCurrent = currentStack.has(DataInit.FLY_DATA);
-        if (!hasDataPrevious) {
-            if (hasDataCurrent) {
-                // データのないアイテムからデータのあるアイテムに代わったとき
+        return equipmentChangeHelper(level, entity, currentStack, previousStack, DataInit.FLY_DATA.get(),
+                player -> {
+                    // データのないアイテムからデータのあるアイテムに代わったとき
 
-                // ↓ 補足
-                // player.getAbilities().flying <- クリエなどで浮いているときの値
-                // player.isFallFlying() <- エリトラなどで滑空しているときの設定
-                player.getAbilities().mayfly = true;
-                player.onUpdateAbilities();
-            }
-        }else {
-            if (!hasDataCurrent) {
-                // データのあるアイテムからデータがないアイテムに変わったとき
-                player.getAbilities().mayfly = false;
-                player.getAbilities().flying = false;
-                player.onUpdateAbilities();
-                if (player instanceof ServerPlayer serverPlayer) {
-                    serverPlayer.connection.teleport(serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(),
-                            serverPlayer.getYRot(), serverPlayer.getXRot());
-                }
-            }
+                    // ↓ 補足
+                    // player.getAbilities().flying <- クリエなどで浮いているときの値
+                    // player.isFallFlying() <- エリトラなどで滑空しているときの設定
+                    player.getAbilities().mayfly = true;
+                    player.onUpdateAbilities();
+                    },
+                player -> {
+                    // データのあるアイテムからデータがないアイテムに変わったとき
+                    player.getAbilities().mayfly = false;
+                    player.getAbilities().flying = false;
+                    player.onUpdateAbilities();
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        serverPlayer.connection.teleport(serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(),
+                                serverPlayer.getYRot(), serverPlayer.getXRot());
+                    }
         }
-        // このイベントはキャンセルが発生しない
-        return false;
+        );
     }
 
     @Override

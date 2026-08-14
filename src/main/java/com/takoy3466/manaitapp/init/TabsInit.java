@@ -15,7 +15,7 @@ public class TabsInit {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MANAITA_TAB = TABS.register("manaita_tab",() -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
-            .title(Component.literal("Manaita"))
+            .title(Component.translatable("itemGroup.manaitapp"))
             .icon(() -> new ItemStack(BlocksInit.MANAITA_MTK.getItem()))
             .displayItems(((parameters, output) -> {
                 BlocksInit.BLOCKS.getRegister().getBehind().getEntries().stream().map(DeferredHolder::get).forEach(output::accept);

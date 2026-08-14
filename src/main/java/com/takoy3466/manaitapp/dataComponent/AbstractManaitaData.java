@@ -3,6 +3,8 @@ package com.takoy3466.manaitapp.dataComponent;
 import com.takoy3466.manaitapp.core.interfaces.IMsg;
 
 import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 public abstract class AbstractManaitaData<T> implements IMsg<T> {
     protected T tMsg;

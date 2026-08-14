@@ -27,15 +27,9 @@ public class ToolManaitaSword extends SwordItem {
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity player) {
-        WeaponUtil.die(target);
-        return super.hurtEnemy(stack, target, player);
-    }
-
-    @Override
     public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
         if (entity instanceof LivingEntity target) {
-            WeaponUtil.die(target);
+            WeaponUtil.die(target, player);
         }
         return super.onLeftClickEntity(stack, player, entity);
     }

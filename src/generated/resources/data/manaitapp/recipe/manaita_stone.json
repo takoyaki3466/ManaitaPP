@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:cobblestone"
+    },
+    "C": {
+      "item": "manaitapp:manaita_wood"
+    }
+  },
+  "pattern": [
+    "###CCC###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "manaitapp:manaita_stone"
+  }
+}

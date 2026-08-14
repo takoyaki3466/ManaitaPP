@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "manaitamtk:manaita_furnace_mtk"
+    },
+    "title": {
+      "translate": "advancements.manaita_furnace_mtk.title"
+    },
+    "description": {
+      "translate": "advancements.manaita_furnace_mtk.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "advancements_2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "manaitamtk:manaita_furnace_mtk"
+            ],
+            "count": {
+              "min": 1,
+              "max": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "manaitamtk:manaita_furnace_wood"
+}

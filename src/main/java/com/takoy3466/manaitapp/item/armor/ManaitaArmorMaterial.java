@@ -1,5 +1,7 @@
 package com.takoy3466.manaitapp.item.armor;
 
+import com.takoy3466.manaitapp.Manaitapp;
+import com.takoy3466.manaitapp.core.Identifier;
 import net.minecraft.Util;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
@@ -10,6 +12,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class ManaitaArmorMaterial {
+    public static final Identifier identifier = new Identifier(Manaitapp.MOD_ID, "textures/models/armor/armor_manaita_layer.png");
 
     public static ArmorMaterial MANAITA_MATERIAL = new ArmorMaterial(
             Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
@@ -22,7 +25,9 @@ public class ManaitaArmorMaterial {
             30,
             SoundEvents.ARMOR_EQUIP_GENERIC,
             () -> Ingredient.EMPTY,
-            List.of(),
+            List.of(
+                    new ArmorMaterial.Layer(identifier.get())
+            ),
             2147473647,
             2
     );
