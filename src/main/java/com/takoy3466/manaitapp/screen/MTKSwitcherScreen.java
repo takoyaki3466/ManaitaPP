@@ -26,7 +26,7 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class MTKSwitcherScreen extends Screen implements IDataOperator {
     public static final String RANGE = "range";
-    private static final Identifier MTK_SWITCHER_LOCATION = new Identifier(Manaitapp.MOD_ID,"textures/gui/container/mtk_switcher.png");
+    private static final Identifier MTK_SWITCHER_LOCATION = new Identifier(Manaitapp.MOD_ID,"textures/gui/mtk_switcher.png");
     private static final int ALL_SLOTS_WIDTH = MTKIcon.values().length * 31 - 5;
     private MTKIcon previousMode;
     private MTKIcon currentlyMode;
@@ -220,16 +220,6 @@ public class MTKSwitcherScreen extends Screen implements IDataOperator {
     public static class MTKIconSlot extends AbstractWidget {
         final MTKIcon icon;
         private boolean isSelected;
-        /*
-        SLOT_LOCATION_X = 0;
-        SLOT_LOCATION_Y = 76;
-        SELECTED_LOCATION_X = 26;
-        SELECTED_LOCATION_Y = 75;
-        SIZE_X = 26;
-        SIZE_Y = 36;
-        OVERALL_X = 128;
-        OVERALL_Y = 128;
-        */
 
         public MTKIconSlot(MTKIcon mtkIcon, int x, int y) {
             super(x, y, 26, 26, mtkIcon.getName());
@@ -257,8 +247,8 @@ public class MTKSwitcherScreen extends Screen implements IDataOperator {
         }
 
         @Override
-        public boolean isMouseOver(double x, double y) { // xだけで判断するように変更
-            return this.active && this.visible && x >= (double)this.getX()/* && y >= (double)this.getY()*/ && x < (double)(this.getX() + this.width)/* && y < (double)(this.getY() + this.height)*/;
+        public boolean isMouseOver(double x, double y) {
+            return this.active && this.visible && x >= (double)this.getX() && x < (double)(this.getX() + this.width)/* && y < (double)(this.getY() + this.height)*/;
         }
 
         public void setSelected(boolean selected) {

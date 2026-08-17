@@ -1,8 +1,11 @@
 package com.takoy3466.manaitapp.entity;
 
+import com.takoy3466.manaitapp.core.interfaces.IManaitaType;
+import com.takoy3466.manaitapp.mixin.LivingEntityMixin;
 import com.takoy3466.manaitapp.util.WeaponUtil;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -32,7 +35,9 @@ public class EntityManaitaArrow extends AbstractArrow {
     }
 
     public void kill(@NotNull Entity target) {
-        WeaponUtil.manaitaKill(target);
+        if (target instanceof LivingEntity livingTarget && this.getOwner() instanceof LivingEntity livingOwner) {
+            ((IManaitaType)livingTarget).manaitaPP$manaitaKill(livingOwner);
+        }
     }
 
     @Override

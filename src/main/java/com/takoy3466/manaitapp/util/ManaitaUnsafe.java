@@ -9,11 +9,11 @@ import sun.misc.Unsafe;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
-public class ManaitaUnsafeDefence {
+public class ManaitaUnsafe {
     private static Unsafe unsafe;
 
     // あらかじめ「絶対に死なない固定用HPオブジェクト」をキャッシュしておく
-    private static final Float IMMUTABLE_HP = Float.valueOf(20.0f);
+    private static final Float IMMUTABLE_HP = 20.0f;
 
     static {
         try {

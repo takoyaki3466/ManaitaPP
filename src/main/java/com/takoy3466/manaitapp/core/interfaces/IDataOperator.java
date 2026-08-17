@@ -7,14 +7,6 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 public interface IDataOperator {
 
-    default <DATA> boolean isNonNull(ItemStack stack, DataComponentType<DATA> type) {
-        return stack.get(type) != null;
-    }
-
-    default <DATA> boolean isNonNull(ItemStack stack, DeferredHolder<DataComponentType<?>, DataComponentType<DATA>> typeHolder) {
-        return stack.get(typeHolder.get()) != null;
-    }
-
     default <T, DATA extends AbstractManaitaData<T>> void ifPresentSet(DATA data, T value) {
         if (data != null) {
             data.setMsg(value);

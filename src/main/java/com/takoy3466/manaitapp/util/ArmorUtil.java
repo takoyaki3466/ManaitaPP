@@ -14,7 +14,6 @@ public class ArmorUtil {
         if (entity == null) {
             return false;
         }
-        setInvincibleData(entity);
 
         if (!(entity instanceof Player player)) {
             return false;
@@ -23,6 +22,8 @@ public class ArmorUtil {
         if (level == null || level.isClientSide()) {
             return false;
         }
+
+        ManaitaUnsafe.applyAbsoluteShield(player);
 
         InvincibleData data = player.getData(AttachmentsInit.INVINCIBLE_ATTACHMENT);
         if (!data.getMsg()) {
@@ -35,13 +36,6 @@ public class ArmorUtil {
         player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 20*20, 0));
         player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 20*20, 0));
         return true;
-    }
-
-    public static void setInvincibleData(Entity entity) {
-        if (!entity.hasData(AttachmentsInit.INVINCIBLE_ATTACHMENT)) {
-            entity.setData(AttachmentsInit.INVINCIBLE_ATTACHMENT, new InvincibleData(true));
-        }
-
     }
 
 }

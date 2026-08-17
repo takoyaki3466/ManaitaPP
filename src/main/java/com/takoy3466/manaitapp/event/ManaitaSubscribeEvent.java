@@ -1,7 +1,6 @@
 package com.takoy3466.manaitapp.event;
 
 import com.takoy3466.manaitapp.Manaitapp;
-import com.takoy3466.manaitapp.init.AttachmentsInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -16,7 +15,6 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @EventBusSubscriber(modid = Manaitapp.MOD_ID)
 public class ManaitaSubscribeEvent {

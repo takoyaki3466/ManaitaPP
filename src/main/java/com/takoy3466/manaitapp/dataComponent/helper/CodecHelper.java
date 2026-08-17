@@ -1,9 +1,10 @@
-package com.takoy3466.manaitapp.dataComponent;
+package com.takoy3466.manaitapp.dataComponent.helper;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.PrimitiveCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.takoy3466.manaitapp.core.interfaces.IMsg;
+import com.takoy3466.manaitapp.dataComponent.AbstractManaitaData;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 

@@ -1,7 +1,7 @@
 {
 	"textures": {
-		"0": "manaitapp:block/furnace_mtk",
-		"particle": "manaitapp:block/furnace_mtk"
+		"0": "manaitapp:block/mtk",
+		"particle": "manaitapp:block/mtk"
 	},
 	"elements": [
 		{

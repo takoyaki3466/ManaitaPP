@@ -2,6 +2,7 @@ package com.takoy3466.manaitapp.dataComponent;
 
 import com.mojang.serialization.Codec;
 import com.takoy3466.manaitapp.core.interfaces.IDataAttachment;
+import com.takoy3466.manaitapp.dataComponent.helper.CodecHelper;
 import com.takoy3466.manaitapp.init.DataInit;
 import com.takoy3466.manaitapp.keyMapping.ManaitaKey;
 import com.takoy3466.manaitapp.util.WeaponUtil;
@@ -58,12 +59,12 @@ public class LightningStrikerData extends AbstractManaitaData<Boolean> implement
         if (level == null || !(entity instanceof Player player)) {
             return false;
         }
-        if (player.isSteppingCarefully() || ManaitaKey.SwitchExterminationKey.matches(key, scanCode)) {
+        if (player.isSteppingCarefully() && ManaitaKey.SwitchExterminationKey.isDown()) {
             ItemStack stack = player.getMainHandItem();
             LightningStrikerData data = stack.get(DataInit.STRIKER_DATA);
             if (data != null) {
                 data.setMsg(!data.getMsg());
-                player.displayClientMessage(Component.literal("hello"), true);
+                player.displayClientMessage(Component.literal("isKillAll: " + data.getMsg()), true);
             }
         }
         return true;

@@ -2,6 +2,7 @@ package com.takoy3466.manaitapp.dataComponent;
 
 import com.mojang.serialization.Codec;
 import com.takoy3466.manaitapp.core.interfaces.IDataAttachment;
+import com.takoy3466.manaitapp.dataComponent.helper.CodecHelper;
 import com.takoy3466.manaitapp.init.DataInit;
 import com.takoy3466.manaitapp.keyMapping.ManaitaKey;
 import io.netty.buffer.ByteBuf;

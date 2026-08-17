@@ -10,8 +10,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import javax.xml.crypto.Data;
-
 public class DataInit {
 
     public static DeferredRegister.DataComponents DATA_COMPONENT = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Manaitapp.MOD_ID);
@@ -23,7 +21,6 @@ public class DataInit {
     public static DeferredHolder<DataComponentType<?>, DataComponentType<InvincibleData>> INVINCIBLE_DATA = registerData("invincible_data", InvincibleData.CODEC, InvincibleData.STREAM_CODEC);
     public static DeferredHolder<DataComponentType<?>, DataComponentType<SpreadGrowData>> SPREAD_GROW_DATA = registerData("spread_grow_data", SpreadGrowData.CODEC, SpreadGrowData.STREAM_CODEC);
     public static DeferredHolder<DataComponentType<?>, DataComponentType<ManaitaFlyData>> FLY_DATA = registerData("manaita_fly_data", ManaitaFlyData.CODEC, ManaitaFlyData.STREAM_CODEC);
-    public static DeferredHolder<DataComponentType<?>, DataComponentType<MTKData>> MTK_DATA = registerData("mtk_data", MTKData.CODEC, MTKData.STREAM_CODEC);
 
     public static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> registerData(String name, Codec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec) {
         return DATA_COMPONENT.register(name,

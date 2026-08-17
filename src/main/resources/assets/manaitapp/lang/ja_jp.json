@@ -26,5 +26,47 @@
   "item.manaitapp.manaita_helmet": "まな板のヘルメット",
   "item.manaitapp.manaita_chestplate": "まな板のチェストプレート",
   "item.manaitapp.manaita_leggings": "まな板のレギンス",
-  "item.manaitapp.manaita_boots": "まな板のブーツ"
+  "item.manaitapp.manaita_boots": "まな板のブーツ",
+
+  "advancements.crushed_manaita.title": "粉砕機はないのか？",
+  "advancements.crushed_manaita.desctiption": "まな板の粉を作ろう！",
+
+  "advancements.manaita_axe.title": "剥いだ木をもどせる！どういう技術だよ！！！",
+  "advancements.manaita_axe.desctiption": "まな板の斧を作ろう！",
+
+  "advancements.manaita_bow.title": "なんかたぶんすごい！",
+  "advancements.manaita_bow.desctiption": "まな板の弓を作ろう！",
+
+  "advancements.manaita_equip.title": "サバイバルなのに飛んじゃっていいんですか？！",
+  "advancements.manaita_equip.desctiption": "まな板のヘルメットを作ろう！",
+
+  "advancements.manaita_furnace_mtk.title": "スカスカなのにどうやって焼いてるんだこれ！",
+  "advancements.manaita_furnace_mtk.desctiption": "MTKのかまどを作ろう",
+
+  "advancements.manaita_furnace_wood.title": "木は燃えちゃうって！",
+  "advancements.manaita_furnace_wood.desctiption": "木のかまどを作ろう！",
+
+  "advancements.manaita_hoe.title": "多分怪しい粉を撒いてるクワ",
+  "advancements.manaita_hoe.desctiption": "まな板のクワを作ろう！",
+
+  "advancements.manaita_mtk.title": "MTKって何？",
+  "advancements.manaita_mtk.desctiption": "MTKのまな板を作ろう！",
+
+  "advancements.manaita_origin.title": "まな板にしようぜ！",
+  "advancements.manaita_origin.desctiption": "まな板の素を原木から手に入れよう！",
+
+  "advancements.manaita_paxel.title": "これ1つあれば他はゴミ！",
+  "advancements.manaita_paxel.desctiption": "まな板のパクセルを作ろう！",
+
+  "advancements.manaita_shovel.title": "なんも機能ないやんけ！",
+  "advancements.manaita_shovel.desctiption": "まな板のシャベルを作ろう！",
+
+  "advancements.manaita_sword.title": "これはまだチュートリアル",
+  "advancements.manaita_sword.desctiption": "まな板の剣を作ろう！",
+
+  "advancements.manaita_wood.title": "包丁はどこだ？",
+  "advancements.manaita_wood.desctiption": "木のまな板を作ろう！",
+
+  "advancements.mtk_sword.title": "万物はまな板の支配下に",
+  "advancements.mtk_sword.desctiption": "神の剣を作ろう！"
 }

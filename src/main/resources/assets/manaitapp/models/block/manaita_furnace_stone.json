@@ -1,7 +1,7 @@
 {
   "textures": {
-    "0": "manaitapp:block/furnace_stone",
-    "particle": "manaitapp:block/furnace_stone"
+    "0": "manaitapp:block/furnace_cobblestone",
+    "particle": "manaitapp:block/furnace_cobblestone"
   },
   "elements": [
     {
