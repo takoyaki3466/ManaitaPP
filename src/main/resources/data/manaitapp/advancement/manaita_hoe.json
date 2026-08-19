@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "manaitamtk:manaita_axe"
+      "id": "manaitapp:manaita_hoe"
     },
     "title": {
-      "translate": "advancements.manaita_axe.title"
+      "translate": "advancements.manaita_hoe.title"
     },
     "description": {
-      "translate": "advancements.manaita_axe.description"
+      "translate": "advancements.manaita_hoe.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "manaitamtk:manaita_axe"
+              "manaitapp:manaita_hoe"
             ],
             "count": {
               "min": 1,
@@ -32,5 +32,5 @@
       }
     }
   },
-  "parent": "manaitamtk:manaita_mtk"
+  "parent": "manaitapp:manaita_mtk"
 }

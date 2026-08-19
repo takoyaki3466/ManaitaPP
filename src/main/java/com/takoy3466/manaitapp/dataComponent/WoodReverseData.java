@@ -12,6 +12,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class WoodReverseData extends AbstractManaitaData<Boolean> implements IDataAttachment {
     public static final StreamCodec<ByteBuf, WoodReverseData> STREAM_CODEC = CodecHelper.networkCodec(ByteBufCodecs.BOOL, WoodReverseData::new);
@@ -22,12 +23,8 @@ public class WoodReverseData extends AbstractManaitaData<Boolean> implements IDa
     }
 
     @Override
-    public boolean onRightClickBlock(Level level, BlockPos pos, Entity entity, InteractionHand hand) {
-        System.out.println("onRightClick was called!");
-        if (level == null || entity == null) {
-            return false;
-        }
-        if (level.isClientSide()|| !(entity instanceof Player player)) {
+    public boolean onRightClickBlock(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
+        if (!(interactEntity instanceof Player player)) {
             return false;
         }
         if (!player.isSteppingCarefully()) {

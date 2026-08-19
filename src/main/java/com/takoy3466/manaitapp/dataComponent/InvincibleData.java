@@ -6,7 +6,6 @@ import com.takoy3466.manaitapp.dataComponent.helper.CodecHelper;
 import com.takoy3466.manaitapp.init.AttachmentsInit;
 import com.takoy3466.manaitapp.init.DataInit;
 import com.takoy3466.manaitapp.util.ArmorUtil;
-import com.takoy3466.manaitapp.util.ManaitaUnsafe;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -14,6 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class InvincibleData extends AbstractManaitaData<Boolean> implements IDataAttachment {
 
@@ -32,13 +32,13 @@ public class InvincibleData extends AbstractManaitaData<Boolean> implements IDat
     }
 
     @Override
-    public boolean onInvTick(Level level, Entity entity) {
-        return ArmorUtil.invincible(level, entity);
+    public boolean onInvTick(@NotNull Level level, @NotNull Entity tickEntity) {
+        return ArmorUtil.invincible(level, tickEntity);
     }
 
     @Override
-    public boolean onLivingEquipmentChange(Level level, Entity entity, ItemStack currentStack, ItemStack previousStack) {
-        return equipmentChangeHelper(level, entity, currentStack, previousStack, DataInit.INVINCIBLE_DATA.get(),
+    public boolean onLivingEquipmentChange(@NotNull Level level, @NotNull Entity interactEntity, ItemStack currentStack, ItemStack previousStack) {
+        return equipmentChangeHelper(level, interactEntity, currentStack, previousStack, DataInit.INVINCIBLE_DATA.get(),
                 player -> changeData(player, true),
                 player -> changeData(player, false)
         );

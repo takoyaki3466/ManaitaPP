@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
@@ -18,42 +19,42 @@ import java.util.function.Consumer;
  */
 public interface IDataAttachment {
 
-    default boolean onRightClickItem(Level level, BlockPos pos, Entity entity, InteractionHand hand) {
+    default boolean onRightClickItem(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
         return false;
     }
 
-    default boolean onRightClickBlock(Level level, BlockPos pos, Entity entity, InteractionHand hand) {
+    default boolean onRightClickBlock(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
         return false;
     }
 
-    default boolean onLeftClickItem(Level level, BlockPos pos, Entity entity, InteractionHand hand) {
+    default boolean onLeftClickItem(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
         return false;
     }
 
-    default boolean onLeftClickBlock(Level level, BlockPos pos, Entity entity, InteractionHand hand) {
+    default boolean onLeftClickBlock(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
         return false;
     }
 
-    default boolean onKeyDown(Level level, Entity entity, int key, int scanCode, int action) {
+    default boolean onKeyDown(@NotNull Level level, @NotNull Entity interactEntity, int key, int scanCode, int action) {
         return false;
     }
 
-    default boolean onInvTick(Level level, Entity entity) {
+    default boolean onInvTick(@NotNull Level level, @NotNull Entity tickEntity) {
         return false;
     }
 
-    default boolean onLivingEquipmentChange(Level level, Entity entity, ItemStack currentStack, ItemStack previousStack) {
+    default boolean onLivingEquipmentChange(@NotNull Level level, @NotNull Entity interactEntity, ItemStack currentStack, ItemStack previousStack) {
         return false;
     }
 
-    default boolean onAttackEntity(Level level, Player player, Entity target) {
+    default boolean onAttackEntity(@NotNull Level level, @NotNull Player player, @NotNull Entity target) {
         return false;
     }
 
-    default <T> boolean equipmentChangeHelper(Level level, Entity entity, ItemStack currentStack, ItemStack previousStack,
-                                              DataComponentType<T> type, Consumer<Player> noDataToHasDataConsumer, Consumer<Player> hasDataToNoDataConsumer
+    default <T> boolean equipmentChangeHelper(@NotNull Level level, @NotNull Entity interactEntity, ItemStack currentStack, ItemStack previousStack,
+                                              @NotNull DataComponentType<T> type, Consumer<Player> noDataToHasDataConsumer, Consumer<Player> hasDataToNoDataConsumer
     ) {
-        if (level == null || !(entity instanceof Player player)) {
+        if (!(interactEntity instanceof Player player)) {
             return false;
         }
         if (level.isClientSide()) {

@@ -1,18 +1,15 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:manaita_origin"
+      "id": "manaitapp:manaita_axe"
     },
     "title": {
-      "translate": "advancements.manaita_origin.title"
+      "translate": "advancements.manaita_axe.title"
     },
     "description": {
-      "translate": "advancements.manaita_origin.description"
+      "translate": "advancements.manaita_axe.description"
     },
     "frame": "task",
-
-    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
-
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
@@ -24,7 +21,7 @@
         "items": [
           {
             "items": [
-              "minecraft:manaita_origin"
+              "manaitapp:manaita_axe"
             ],
             "count": {
               "min": 1,
@@ -34,5 +31,6 @@
         ]
       }
     }
-  }
+  },
+  "parent": "manaitapp:manaita_mtk"
 }

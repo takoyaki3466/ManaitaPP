@@ -7,8 +7,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 
 public class CrushedManaitaRecipeSerializer implements RecipeSerializer<CrushedManaitaRecipe> {
-    public static final MapCodec<CrushedManaitaRecipe> CODEC = MapCodec.unit(CrushedManaitaRecipe::new);
-    public static final StreamCodec<RegistryFriendlyByteBuf, CrushedManaitaRecipe> STREAM_CODEC = StreamCodec.unit(new CrushedManaitaRecipe());
+    public static final MapCodec<CrushedManaitaRecipe> CODEC = MapCodec.unit(CrushedManaitaRecipe.INSTANCE);
+    public static final StreamCodec<RegistryFriendlyByteBuf, CrushedManaitaRecipe> STREAM_CODEC = StreamCodec.unit(CrushedManaitaRecipe.INSTANCE);
     @Override
     public @NotNull MapCodec<CrushedManaitaRecipe> codec() {
         return CODEC;

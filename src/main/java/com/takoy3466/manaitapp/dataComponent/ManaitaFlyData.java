@@ -28,8 +28,8 @@ public class ManaitaFlyData extends AbstractManaitaData<ManaitaFlyData.FlySpeed>
 
 
     @Override
-    public boolean onKeyDown(Level level, Entity entity, int key, int scanCode, int action) {
-        if (level == null || !(entity instanceof Player player)) {
+    public boolean onKeyDown(@NotNull Level level, @NotNull Entity interactEntity, int key, int scanCode, int action) {
+        if (!(interactEntity instanceof Player player)) {
             return false;
         }
         if (level.isClientSide()) {
@@ -51,8 +51,8 @@ public class ManaitaFlyData extends AbstractManaitaData<ManaitaFlyData.FlySpeed>
      */
     @SuppressWarnings("deprecation")
     @Override
-    public boolean onLivingEquipmentChange(Level level, Entity entity, ItemStack currentStack, ItemStack previousStack) {
-        return equipmentChangeHelper(level, entity, currentStack, previousStack, DataInit.FLY_DATA.get(),
+    public boolean onLivingEquipmentChange(@NotNull Level level, @NotNull Entity interactEntity, ItemStack currentStack, ItemStack previousStack) {
+        return equipmentChangeHelper(level, interactEntity, currentStack, previousStack, DataInit.FLY_DATA.get(),
                 player -> {
                     // データのないアイテムからデータのあるアイテムに代わったとき
 
@@ -76,8 +76,8 @@ public class ManaitaFlyData extends AbstractManaitaData<ManaitaFlyData.FlySpeed>
     }
 
     @Override
-    public boolean onInvTick(Level level, Entity entity) {
-        if (level == null || !(entity instanceof Player player)) {
+    public boolean onInvTick(@NotNull Level level, @NotNull Entity tickEntity) {
+        if (!(tickEntity instanceof Player player)) {
             return false;
         }
         if (level.isClientSide()) {

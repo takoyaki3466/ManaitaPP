@@ -7,6 +7,6 @@ import net.minecraft.world.item.Item;
 public class ManaitaChestplate extends ArmorItem {
 
     public ManaitaChestplate() {
-        super(new Holder.Direct<>(ManaitaArmorMaterial.MANAITA_MATERIAL), ArmorItem.Type.HELMET, new Item.Properties());
+        super(new Holder.Direct<>(ManaitaArmorMaterial.MANAITA_MATERIAL), Type.CHESTPLATE, new Item.Properties());
     }
 }

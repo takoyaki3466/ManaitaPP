@@ -1,10 +1,10 @@
 package com.takoy3466.manaitapp.item.tool;
 
+import com.takoy3466.manaitapp.dataComponent.ManaitaKillData;
 import com.takoy3466.manaitapp.dataComponent.RangeBreakData;
 import com.takoy3466.manaitapp.dataComponent.helper.DataHoverHelper;
 import com.takoy3466.manaitapp.init.DataInit;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -17,7 +17,10 @@ public class ToolManaitaPaxel extends Item {
 
 
     public ToolManaitaPaxel() {
-        super(new Item.Properties());
+        super(new Item.Properties().fireResistant()
+                .component(DataInit.RANGE_BREAK_DATA, new RangeBreakData(1))
+                .component(DataInit.KILL_DATA, new ManaitaKillData(true))
+        );
     }
 
     @Override
@@ -29,6 +32,6 @@ public class ToolManaitaPaxel extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
-        tooltipComponents.add(DataHoverHelper.hoverDataText(stack, DataInit.RANGE_BREAK.get(), data -> ": " + data.getMsg() + "x" + data.getMsg()));
+        tooltipComponents.add(DataHoverHelper.hoverDataText(stack, DataInit.RANGE_BREAK_DATA.get(), data -> ": " + data.getMsg() + "x" + data.getMsg()));
     }
 }

@@ -12,13 +12,13 @@ import java.util.List;
 
 public class ToolManaitaAxe extends AxeItem {
     public ToolManaitaAxe() {
-        super(ManaitaToolTier.MANAITA_TIER, new Properties().fireResistant().component(DataInit.WOOD_REVERSE, new WoodReverseData(true)));
+        super(ManaitaToolTier.MANAITA_TIER, new Properties().fireResistant().component(DataInit.WOOD_REVERSE_DATA, new WoodReverseData(true)));
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
-        tooltipComponents.add(DataHoverHelper.hoverDataText(stack, DataInit.RANGE_BREAK.get(), data -> ""));
+        tooltipComponents.add(DataHoverHelper.hoverDataText(stack, DataInit.RANGE_BREAK_DATA.get(), data -> ""));
     }
 }

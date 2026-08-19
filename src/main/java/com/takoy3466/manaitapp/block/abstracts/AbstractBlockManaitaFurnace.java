@@ -5,6 +5,7 @@ import com.takoy3466.manaitapp.block.blockEntity.abstracts.AbstractManaitaFurnac
 import com.takoy3466.manaitapp.core.ManaitaTier;
 import com.takoy3466.manaitapp.core.interfaces.IMultiple;
 import com.takoy3466.manaitapp.core.interfaces.ITickableBlockEntity;
+import com.takoy3466.manaitapp.util.ManaitaShapeUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -38,24 +39,6 @@ public abstract class AbstractBlockManaitaFurnace extends BaseEntityBlock implem
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = DirectionalBlock.FACING;
     private final ManaitaTier manaitaTier;
-
-    private static final VoxelShape UP_SHAPE = Block.box(1, 0, 3, 15, 1, 13);
-    private static final VoxelShape DOWN_SHAPE = Block.box(1, 15, 3, 15, 16, 13);
-    private static final VoxelShape NORTH_SHAPE = Block.box(1, 3, 0, 15, 13, 1);
-    private static final VoxelShape SOUTH_SHAPE = Block.box(1, 3, 15, 15, 13, 16);
-    private static final VoxelShape WEST_SHAPE = Block.box(0, 3, 1, 1, 13, 15);
-    private static final VoxelShape EAST_SHAPE = Block.box(15, 3, 1, 16, 13, 15);
-
-    private static VoxelShape getShape(Direction direction) {
-        return switch (direction) {
-            case UP -> UP_SHAPE;
-            case DOWN -> DOWN_SHAPE;
-            case NORTH -> NORTH_SHAPE;
-            case SOUTH -> SOUTH_SHAPE;
-            case WEST -> WEST_SHAPE;
-            case EAST -> EAST_SHAPE;
-        };
-    }
 
     protected AbstractBlockManaitaFurnace(ManaitaTier manaitaTier) {
         super(Properties.of().noOcclusion());
@@ -121,12 +104,12 @@ public abstract class AbstractBlockManaitaFurnace extends BaseEntityBlock implem
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return getShape(state.getValue(FACING));
+        return ManaitaShapeUtil.getShape(state.getValue(FACING));
     }
 
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return getShape(state.getValue(FACING));
+        return ManaitaShapeUtil.getShape(state.getValue(FACING));
     }
 
     @Override

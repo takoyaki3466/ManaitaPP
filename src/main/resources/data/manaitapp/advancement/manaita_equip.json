@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "manaitamtk:manaita_bow"
+      "id": "manaitapp:manaita_helmet"
     },
     "title": {
-      "translate": "advancements.manaita_bow.title"
+      "translate": "advancements.manaita_equip.title"
     },
     "description": {
-      "translate": "advancements.manaita_bow.description"
+      "translate": "advancements.manaita_equip.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "manaitamtk:manaita_bow"
+              "manaitapp:manaita_helmet"
             ],
             "count": {
               "min": 1,
@@ -32,5 +32,5 @@
       }
     }
   },
-  "parent": "manaitamtk:manaita_origin"
+  "parent": "manaitapp:manaita_origin"
 }

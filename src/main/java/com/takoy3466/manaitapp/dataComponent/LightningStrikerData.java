@@ -17,6 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -36,11 +37,8 @@ public class LightningStrikerData extends AbstractManaitaData<Boolean> implement
     }
     public static double RADIUS = 50;
     @Override
-    public boolean onRightClickItem(Level level, BlockPos pos, Entity entity, InteractionHand hand) {
-        if (level == null || entity == null) {
-            return false;
-        }
-        if (level.isClientSide() || !(entity instanceof Player player)) {
+    public boolean onRightClickItem(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
+        if (level.isClientSide() || !(interactEntity instanceof Player player)) {
             return false;
         }
         LightningStrikerData data = player.getItemInHand(hand).get(DataInit.STRIKER_DATA);
@@ -48,15 +46,15 @@ public class LightningStrikerData extends AbstractManaitaData<Boolean> implement
             return false;
         }
 
-        List<LivingEntity> targets = WeaponUtil.selectTargets(LivingEntity.class, level, entity, RADIUS, data.getMsg() ? WeaponUtil.ALL_LIVING : WeaponUtil.ONLY_ENEMY);
+        List<LivingEntity> targets = WeaponUtil.selectTargets(LivingEntity.class, level, player, RADIUS, data.getMsg() ? WeaponUtil.ALL_LIVING : WeaponUtil.ONLY_ENEMY);
         WeaponUtil.lightningStriker(targets, level, player);
         return true;
 
     }
 
     @Override
-    public boolean onKeyDown(Level level, Entity entity, int key, int scanCode, int action) {
-        if (level == null || !(entity instanceof Player player)) {
+    public boolean onKeyDown(@NotNull Level level, @NotNull Entity interactEntity, int key, int scanCode, int action) {
+        if (!(interactEntity instanceof Player player)) {
             return false;
         }
         if (player.isSteppingCarefully() && ManaitaKey.SwitchExterminationKey.isDown()) {

@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "manaitamtk:crushed_manaita"
+      "id": "manaitapp:manaita_sword"
     },
     "title": {
-      "translate": "advancements.crushed_manaita.title"
+      "translate": "advancements.manaita_sword.title"
     },
     "description": {
-      "translate": "advancements.crushed_manaita.description"
+      "translate": "advancements.manaita_sword.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "manaitamtk:crushed_manaita"
+              "manaitapp:manaita_sword"
             ],
             "count": {
               "min": 1,
@@ -32,5 +32,5 @@
       }
     }
   },
-  "parent": "manaitamtk:manaita_origin"
+  "parent": "manaitapp:manaita_mtk"
 }

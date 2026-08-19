@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "manaitamtk:manaita_mtk"
+      "id": "manaitapp:manaita_furnace_mtk"
     },
     "title": {
-      "translate": "advancements.manaita_mtk.title"
+      "translate": "advancements.manaita_furnace_mtk.title"
     },
     "description": {
-      "translate": "advancements.manaita_mtk.description"
+      "translate": "advancements.manaita_furnace_mtk.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "manaitamtk:manaita_mtk"
+              "manaitapp:manaita_furnace_mtk"
             ],
             "count": {
               "min": 1,
@@ -32,5 +32,5 @@
       }
     }
   },
-  "parent": "manaitamtk:manaita_wood"
+  "parent": "manaitapp:manaita_furnace_wood"
 }

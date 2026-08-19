@@ -49,7 +49,6 @@ public abstract class LivingEntityMixin implements IManaitaType {
     @Override
     public void manaitaPP$manaitaKill(LivingEntity attacker) {
         LivingEntity self = (LivingEntity) (Object) this;
-        System.out.println("Entity = " + self.getClass() + "\n" + ", ManaitaEntityData = " + self.getEntityData().get(MANAITA));
         if (self.getEntityData().get(MANAITA)) {
             return;
         }

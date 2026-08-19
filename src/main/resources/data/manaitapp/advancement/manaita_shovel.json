@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "manaitamtk:mtk_sword"
+      "id": "manaitapp:manaita_shovel"
     },
     "title": {
-      "translate": "advancements.mtk_sword.title"
+      "translate": "advancements.manaita_shovel.title"
     },
     "description": {
-      "translate": "advancements.mtk_sword.description"
+      "translate": "advancements.manaita_shovel.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "manaitamtk:mtk_sword"
+              "manaitapp:manaita_shovel"
             ],
             "count": {
               "min": 1,
@@ -32,5 +32,5 @@
       }
     }
   },
-  "parent": "manaitamtk:manaita_sword"
+  "parent": "manaitapp:manaita_mtk"
 }

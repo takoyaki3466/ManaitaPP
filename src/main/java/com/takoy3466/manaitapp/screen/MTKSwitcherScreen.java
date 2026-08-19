@@ -97,7 +97,7 @@ public class MTKSwitcherScreen extends Screen implements IDataOperator {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player != null) {
             ItemStack stack = minecraft.player.getMainHandItem();
-            ifPresentSet(stack, DataInit.RANGE_BREAK, mtkIcon.getModeRange());
+            ifPresentSet(stack, DataInit.RANGE_BREAK_DATA, mtkIcon.getModeRange());
         }
     }
 

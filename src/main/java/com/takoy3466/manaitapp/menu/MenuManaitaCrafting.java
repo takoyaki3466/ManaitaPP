@@ -2,8 +2,7 @@ package com.takoy3466.manaitapp.menu;
 
 import com.takoy3466.manaitapp.core.interfaces.IMultiple;
 import com.takoy3466.manaitapp.core.ManaitaTier;
-import com.takoy3466.manaitapp.init.ItemsInit;
-import com.takoy3466.manaitapp.item.CrushedManaita;
+import com.takoy3466.manaitapp.util.CraftingUtil;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -59,33 +58,29 @@ public class MenuManaitaCrafting extends RecipeBookMenu<CraftingInput, CraftingR
     }
 
     protected void slotChangedCraftingGrid(AbstractContainerMenu menu, Level level, Player player, CraftingInput input, ResultContainer resultContainer) {
-        if (level == null || level.isClientSide()) {
+        if (level == null || level.isClientSide() || !(player instanceof ServerPlayer serverPlayer)) {
             return;
         }
-        ServerPlayer sPlayer = (ServerPlayer)player;
         ItemStack stack = ItemStack.EMPTY;
         Optional<RecipeHolder<CraftingRecipe>> optionalRecipe = Objects.requireNonNull(level.getServer()).getRecipeManager().getRecipeFor(RecipeType.CRAFTING, input, level);
+
         if (optionalRecipe.isPresent()) {
             RecipeHolder<CraftingRecipe> recipeHolder = optionalRecipe.get();
-            if (resultContainer.setRecipeUsed(level, sPlayer, recipeHolder)) {
+
+            if (resultContainer.setRecipeUsed(level, serverPlayer, recipeHolder)) {
                 CraftingRecipe recipe = recipeHolder.value();
                 ItemStack result = recipe.assemble(input, level.registryAccess());
+
                 if (result.isItemEnabled(level.enabledFeatures())) {
                     stack = result;
                     multipler(stack);
-
-                    /*
-                    if (getMultiple() == MTKTiers.BREAK.getMultiple()) {
-                        MTKNetwork.sendToServer(new PacketMTKTrigger(MTKTrigger.CRAFT_IN_BREAK_CRAFTING_TABLE));
-                    }
-                    */
                 }
             }
         }
 
         resultContainer.setItem(0, stack);
         menu.setRemoteSlot(0, stack);
-        sPlayer.connection.send(new ClientboundContainerSetSlotPacket(menu.containerId, menu.incrementStateId(), 0, stack));
+        serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(menu.containerId, menu.incrementStateId(), 0, stack));
     }
 
     @Override
@@ -101,61 +96,15 @@ public class MenuManaitaCrafting extends RecipeBookMenu<CraftingInput, CraftingR
     }
 
     private boolean multipleMatch(CraftingContainer container) {
-        boolean source = false;
-        boolean item = false;
-
-        for(int i = 0; i < container.getContainerSize(); ++i) {
-            ItemStack itemStack = container.getItem(i);
-            if (!itemStack.isEmpty()) {
-                if (itemStack.getItem() == ItemsInit.CRUSHED_MANAITA.get()) {
-                    if (!source) {source = true;}
-                    else {
-                        if (item) {return false;}
-                        item = true;
-                    }
-                } else {
-                    if (item) {return false;}
-                    item = true;
-                }
-            }
-        }
-        return source && item;
+        return CraftingUtil.matches(container);
     }
 
     private ItemStack multipleAssemble(CraftingContainer container, int magnification) {
-        ItemStack empty = ItemStack.EMPTY;
-        int source = 0;
-
-        for(int i = 0; i < container.getContainerSize(); ++i) {
-            ItemStack stack = container.getItem(i);
-            if (!stack.isEmpty() && stack.getItem() != ItemsInit.CRUSHED_MANAITA.get()) {
-                empty = stack;
-            }
-
-            if (!stack.isEmpty() && stack.getItem() == ItemsInit.CRUSHED_MANAITA.get()) {
-                ++source;
-            }
-        }
-
-        ItemStack result;
-        if (source == 2) {
-            result = new ItemStack(ItemsInit.CRUSHED_MANAITA.get());
-            result.setCount(CrushedManaita.MULTIPLE * magnification);
-            return result;
-
-        } else if (empty.isEmpty()) {
-            return ItemStack.EMPTY;
-
-        } else {
-            result = empty.copy();
-            result.setCount(CrushedManaita.MULTIPLE * magnification);
-            return result;
-
-        }
+        return CraftingUtil.multipleAssemble(container.getItems(), magnification);
     }
 
     @Override
-    public ItemStack quickMoveStack(@NotNull Player player, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
         ItemStack empty = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot.hasItem()) {

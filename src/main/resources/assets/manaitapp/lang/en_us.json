@@ -26,7 +26,50 @@
   "item.manaitapp.manaita_helmet": "manaita Helmet",
   "item.manaitapp.manaita_chestplate": "manaita Chestplate",
   "item.manaitapp.manaita_leggings": "manaita leggings",
-  "item.manaitapp.manaita_boots": "manaita boots"
+  "item.manaitapp.manaita_boots": "manaita boots",
 
+  "gui.mtk_switcher_screen.first_title": "Move with ",
+  "gui.mtk_switcher_screen.second_title": " or the wheel",
 
+  "advancements.crushed_manaita.title": "Don't you have a crusher?",
+  "advancements.crushed_manaita.description": "Let's make cutting board powder!",
+
+  "advancements.manaita_axe.title": "Restore stripped wood! What kind of technology is that! ! !",
+  "advancements.manaita_axe.description": "まな板の斧を作ろう！",
+
+  "advancements.manaita_bow.title": "It's probably amazing!",
+  "advancements.manaita_bow.description": "Let's make a cutting board bow!",
+
+  "advancements.manaita_equip.title": "Is it okay to fly when you are trying to survive? !",
+  "advancements.manaita_equip.description": "Let's make a cutting board helmet!",
+
+  "advancements.manaita_furnace_mtk.title": "How do you bake this even though it's so thin!",
+  "advancements.manaita_furnace_mtk.description": "Let's make an MTK stove.",
+
+  "advancements.manaita_furnace_wood.title": "The tree will burn!",
+  "advancements.manaita_furnace_wood.description": "Let's make a wooden stove!",
+
+  "advancements.manaita_hoe.title": "A hoe that is probably spreading suspicious powder.",
+  "advancements.manaita_hoe.description": "Let's make a cutting board hoe!",
+
+  "advancements.manaita_mtk.title": "What is MTK?",
+  "advancements.manaita_mtk.description": "Let's make an MTK cutting board!",
+
+  "advancements.manaita_origin.title": "Let's use it as a cutting board!",
+  "advancements.manaita_origin.description": "Get the raw material for your cutting board from logs!",
+
+  "advancements.manaita_paxel.title": "If you have this one, everything else is trash!",
+  "advancements.manaita_paxel.description": "Let's make paxels on the cutting board!",
+
+  "advancements.manaita_shovel.title": "Nothing works!",
+  "advancements.manaita_shovel.description": "Let's make a cutting board shovel!",
+
+  "advancements.manaita_sword.title": "This is still a tutorial",
+  "advancements.manaita_sword.description": "Let's make a cutting board sword!",
+
+  "advancements.manaita_wood.title": "Where's the knife?",
+  "advancements.manaita_wood.description": "Let's make a wooden cutting board!",
+
+  "advancements.root.title": "Manaita++",
+  "advancements.root.description": "Manaita++"
 }

@@ -14,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class SpreadGrowData extends AbstractManaitaData<Integer> implements IDataAttachment {
     public static final StreamCodec<ByteBuf, SpreadGrowData> STREAM_CODEC = CodecHelper.networkCodec(ByteBufCodecs.INT, SpreadGrowData::new);
@@ -24,8 +25,8 @@ public class SpreadGrowData extends AbstractManaitaData<Integer> implements IDat
     }
 
     @Override
-    public boolean onRightClickBlock(Level level, BlockPos pos, Entity entity, InteractionHand hand) {
-        if (level == null || !(entity instanceof Player player)) {
+    public boolean onRightClickBlock(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
+        if (!(interactEntity instanceof Player player)) {
             return false;
         }
         if (level.isClientSide()) {
@@ -36,8 +37,10 @@ public class SpreadGrowData extends AbstractManaitaData<Integer> implements IDat
         if (data == null) {
             return false;
         }
-        ToolUtil.spreadGrow(level, pos, data.getMsg());
-        return true;
+        if (player.isSteppingCarefully()) {
+            ToolUtil.spreadGrow(level, pos, data.getMsg());
+        }
+        return false;
 
     }
 

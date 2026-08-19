@@ -7,6 +7,6 @@ import net.minecraft.world.item.Item;
 public class ManaitaBoots extends ArmorItem {
 
     public ManaitaBoots() {
-        super(new Holder.Direct<>(ManaitaArmorMaterial.MANAITA_MATERIAL), ArmorItem.Type.HELMET, new Item.Properties());
+        super(new Holder.Direct<>(ManaitaArmorMaterial.MANAITA_MATERIAL), ArmorItem.Type.BOOTS, new Item.Properties());
     }
 }

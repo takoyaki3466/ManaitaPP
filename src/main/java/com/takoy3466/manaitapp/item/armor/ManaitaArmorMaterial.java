@@ -12,7 +12,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class ManaitaArmorMaterial {
-    public static final Identifier identifier = new Identifier(Manaitapp.MOD_ID, "textures/models/armor/armor_manaita_layer");
+    public static final Identifier identifier = new Identifier(Manaitapp.MOD_ID, "armor_manaita");
 
     public static ArmorMaterial MANAITA_MATERIAL = new ArmorMaterial(
             Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {

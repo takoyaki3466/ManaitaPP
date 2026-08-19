@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "manaitamtk:manaita_hoe"
+      "id": "manaitapp:manaita_mtk"
     },
     "title": {
-      "translate": "advancements.manaita_hoe.title"
+      "translate": "advancements.manaita_mtk.title"
     },
     "description": {
-      "translate": "advancements.manaita_hoe.description"
+      "translate": "advancements.manaita_mtk.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "manaitamtk:manaita_hoe"
+              "manaitapp:manaita_mtk"
             ],
             "count": {
               "min": 1,
@@ -32,5 +32,5 @@
       }
     }
   },
-  "parent": "manaitamtk:manaita_mtk"
+  "parent": "manaitapp:manaita_wood"
 }

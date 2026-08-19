@@ -14,18 +14,18 @@ public class DataInit {
 
     public static DeferredRegister.DataComponents DATA_COMPONENT = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Manaitapp.MOD_ID);
 
-    public static DeferredHolder<DataComponentType<?>, DataComponentType<WoodReverseData>> WOOD_REVERSE = registerData("wood_reverse", WoodReverseData.CODEC, WoodReverseData.STREAM_CODEC);
-    public static DeferredHolder<DataComponentType<?>, DataComponentType<RangeBreakData>> RANGE_BREAK = registerData("range_break", RangeBreakData.CODEC, RangeBreakData.STREAM_CODEC);
+    public static DeferredHolder<DataComponentType<?>, DataComponentType<WoodReverseData>> WOOD_REVERSE_DATA = registerData("wood_reverse", WoodReverseData.CODEC, WoodReverseData.STREAM_CODEC);
+    public static DeferredHolder<DataComponentType<?>, DataComponentType<RangeBreakData>> RANGE_BREAK_DATA = registerData("range_break", RangeBreakData.CODEC, RangeBreakData.STREAM_CODEC);
     public static DeferredHolder<DataComponentType<?>, DataComponentType<CrushedManaitaData>> CRUSHED_DATA = registerData("crushed_data", CrushedManaitaData.CODEC, CrushedManaitaData.STREAM_CODEC);
     public static DeferredHolder<DataComponentType<?>, DataComponentType<LightningStrikerData>> STRIKER_DATA = registerData("striker_data", LightningStrikerData.CODEC, LightningStrikerData.STREAM_CODEC);
     public static DeferredHolder<DataComponentType<?>, DataComponentType<InvincibleData>> INVINCIBLE_DATA = registerData("invincible_data", InvincibleData.CODEC, InvincibleData.STREAM_CODEC);
     public static DeferredHolder<DataComponentType<?>, DataComponentType<SpreadGrowData>> SPREAD_GROW_DATA = registerData("spread_grow_data", SpreadGrowData.CODEC, SpreadGrowData.STREAM_CODEC);
     public static DeferredHolder<DataComponentType<?>, DataComponentType<ManaitaFlyData>> FLY_DATA = registerData("manaita_fly_data", ManaitaFlyData.CODEC, ManaitaFlyData.STREAM_CODEC);
+    public static DeferredHolder<DataComponentType<?>, DataComponentType<ManaitaKillData>> KILL_DATA = registerData("manaita_kill_data", ManaitaKillData.CODEC, ManaitaKillData.STREAM_CODEC);
 
     public static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> registerData(String name, Codec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec) {
         return DATA_COMPONENT.register(name,
-                () -> DataComponentType.<T>builder()
-                        .persistent(codec).networkSynchronized(streamCodec).build()
+                () -> DataComponentType.<T>builder().persistent(codec).networkSynchronized(streamCodec).build()
         );
     }
 }

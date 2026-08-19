@@ -7,6 +7,6 @@ import net.minecraft.world.item.Item;
 public class ManaitaLeggings extends ArmorItem {
 
     public ManaitaLeggings() {
-        super(new Holder.Direct<>(ManaitaArmorMaterial.MANAITA_MATERIAL), ArmorItem.Type.HELMET, new Item.Properties());
+        super(new Holder.Direct<>(ManaitaArmorMaterial.MANAITA_MATERIAL), Type.LEGGINGS, new Item.Properties());
     }
 }

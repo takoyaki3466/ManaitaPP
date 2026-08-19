@@ -18,6 +18,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 public class RangeBreakData extends AbstractManaitaData<Integer> implements IDataAttachment {
@@ -29,16 +30,12 @@ public class RangeBreakData extends AbstractManaitaData<Integer> implements IDat
     }
 
     @Override
-    public boolean onLeftClickBlock(Level level, BlockPos pos, Entity entity, InteractionHand hand) {
-        if (level == null || entity == null) {
+    public boolean onLeftClickBlock(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
+        if (!(interactEntity instanceof Player player)) {
             return false;
         }
-        if (level.isClientSide()|| !(entity instanceof Player player)) {
-            return false;
-        }
-
         ItemStack stack = player.getItemInHand(hand);
-        RangeBreakData data = stack.get(DataInit.RANGE_BREAK);
+        RangeBreakData data = stack.get(DataInit.RANGE_BREAK_DATA);
         if (data == null) {
             return false;
         }
@@ -47,7 +44,7 @@ public class RangeBreakData extends AbstractManaitaData<Integer> implements IDat
     }
 
     @Override
-    public boolean onKeyDown(Level level, Entity entity, int key, int scanCode, int action) {
+    public boolean onKeyDown(@NotNull Level level, @NotNull Entity interactEntity, int key, int scanCode, int action) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level == null || minecraft.player == null) {
             return false;
