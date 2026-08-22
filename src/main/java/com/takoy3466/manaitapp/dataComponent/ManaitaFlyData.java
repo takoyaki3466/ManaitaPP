@@ -3,6 +3,7 @@ package com.takoy3466.manaitapp.dataComponent;
 import com.mojang.serialization.Codec;
 import com.takoy3466.manaitapp.core.interfaces.IDataAttachment;
 import com.takoy3466.manaitapp.dataComponent.helper.CodecHelper;
+import com.takoy3466.manaitapp.dataComponent.helper.ManaitaDataComponents;
 import com.takoy3466.manaitapp.init.DataInit;
 import com.takoy3466.manaitapp.keyMapping.ManaitaKey;
 import io.netty.buffer.ByteBuf;
@@ -32,15 +33,12 @@ public class ManaitaFlyData extends AbstractManaitaData<ManaitaFlyData.FlySpeed>
         if (!(interactEntity instanceof Player player)) {
             return false;
         }
-        if (level.isClientSide()) {
-            return false;
-        }
-        if (ManaitaKey.FlySpeedKey.matches(key, scanCode)) {
+        if (ManaitaKey.FlySpeedKey.consumeClick()) {
             ItemStack stack = player.getItemBySlot(EquipmentSlot.HEAD);
             ManaitaFlyData data = stack.get(DataInit.FLY_DATA);
             if (data != null) {
                 data.setMsg(data.getMsg().getNext());
-                player.displayClientMessage(Component.literal("MODE: " + data.getMsg().getFlySpeed()), true);
+                player.displayClientMessage(Component.literal(ManaitaDataComponents.FLY_TEXT.getString() + ": " + data.getMsg().getComponent().getString()), true);
             }
         }
         return true;
@@ -51,28 +49,32 @@ public class ManaitaFlyData extends AbstractManaitaData<ManaitaFlyData.FlySpeed>
      */
     @SuppressWarnings("deprecation")
     @Override
-    public boolean onLivingEquipmentChange(@NotNull Level level, @NotNull Entity interactEntity, ItemStack currentStack, ItemStack previousStack) {
-        return equipmentChangeHelper(level, interactEntity, currentStack, previousStack, DataInit.FLY_DATA.get(),
-                player -> {
-                    // データのないアイテムからデータのあるアイテムに代わったとき
+    public boolean onLivingEquipmentChange(@NotNull Level level, @NotNull Entity interactEntity, ItemStack current, ItemStack previous) {
+        if (interactEntity instanceof Player player) {
+            if (player.isCreative() || player.isSpectator()) {
+                return false;
+            }
+            ManaitaFlyData previousData = previous.get(DataInit.FLY_DATA);
+            ManaitaFlyData currentData = current.get(DataInit.FLY_DATA);
 
-                    // ↓ 補足
-                    // player.getAbilities().flying <- クリエなどで浮いているときの値
-                    // player.isFallFlying() <- エリトラなどで滑空しているときの設定
-                    player.getAbilities().mayfly = true;
-                    player.onUpdateAbilities();
-                    },
-                player -> {
-                    // データのあるアイテムからデータがないアイテムに変わったとき
+
+            if (previousData != null) {
+                if (currentData == null) {
                     player.getAbilities().mayfly = false;
                     player.getAbilities().flying = false;
                     player.onUpdateAbilities();
+
                     if (player instanceof ServerPlayer serverPlayer) {
-                        serverPlayer.connection.teleport(serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(),
-                                serverPlayer.getYRot(), serverPlayer.getXRot());
+                        serverPlayer.connection.teleport(serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), serverPlayer.getYRot(), serverPlayer.getXRot());
                     }
+                }
+            }else if (currentData != null) {
+                player.getAbilities().mayfly = true;
+                player.onUpdateAbilities();
+            }
         }
-        );
+
+        return false;
     }
 
     @Override
@@ -89,21 +91,23 @@ public class ManaitaFlyData extends AbstractManaitaData<ManaitaFlyData.FlySpeed>
             return false;
         }
         player.getAbilities().setFlyingSpeed(data.getMsg().getFlySpeed());
-        return true;
+        player.onUpdateAbilities();
+        return false;
     }
 
     public enum FlySpeed implements StringRepresentable {
-        DEFAULT(0.05f),
-        LOW(0.1f),
-        MEDIUM(0.2f),
-        HIGH(0.4f),
-        EXTREME(0.6f),
-        OMG(1.0f);
+        DEFAULT(0.05f, Component.translatable("misc.manaitapp.fly_speed.default")),
+        LOW(0.1f, Component.translatable("misc.manaitapp.fly_speed.low")),
+        MEDIUM(0.2f, Component.translatable("misc.manaitapp.fly_speed.medium")),
+        HIGH(0.4f, Component.translatable("misc.manaitapp.fly_speed.high")),
+        EXTREME(0.6f, Component.translatable("misc.manaitapp.fly_speed.extream")),
+        OMG(1.0f, Component.translatable("misc.manaitapp.fly_speed.omg"));
 
         public static final Codec<FlySpeed> CODEC = StringRepresentable.fromEnum(FlySpeed::values);
         public static final StreamCodec<ByteBuf, FlySpeed> STREAM_CODEC = ByteBufCodecs.fromCodec(CODEC);
 
         private final float flySpeed;
+        private final Component component;
 
         public FlySpeed getNext() {
             return switch (this) {
@@ -116,8 +120,9 @@ public class ManaitaFlyData extends AbstractManaitaData<ManaitaFlyData.FlySpeed>
             };
         }
 
-        FlySpeed(float flySpeed) {
+        FlySpeed(float flySpeed, Component component) {
             this.flySpeed = flySpeed;
+            this.component = component;
         }
 
         public float getFlySpeed() {
@@ -127,6 +132,10 @@ public class ManaitaFlyData extends AbstractManaitaData<ManaitaFlyData.FlySpeed>
         @Override
         public @NotNull String getSerializedName() {
             return this.name();
+        }
+
+        public Component getComponent() {
+            return component;
         }
     }
 

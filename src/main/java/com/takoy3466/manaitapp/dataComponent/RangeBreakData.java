@@ -30,7 +30,7 @@ public class RangeBreakData extends AbstractManaitaData<Integer> implements IDat
     }
 
     @Override
-    public boolean onLeftClickBlock(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
+    public boolean onRightClickBlock(@NotNull Level level, @NotNull BlockPos pos, @NotNull Entity interactEntity, InteractionHand hand) {
         if (!(interactEntity instanceof Player player)) {
             return false;
         }

@@ -19,14 +19,14 @@ public class ItemsInit {
 
     public static final DeferredItem<Item> MANAITA_ORIGIN = ITEMS.register("manaita_origin", ManaitaOrigin::new);
 
-    public static final DeferredItem<Item> CRUSHED_MANAITA = ITEMS.register("crushed_mtk", CrushedManaita::new);
-    public static final DeferredHolder<Item, AxeItem> MANAITA_AXE = ITEMS.register("manaita_axe", ToolManaitaAxe::new);
-    public static final DeferredHolder<Item, Item> MANAITA_PAXEL = ITEMS.register("manaita_paxel", ToolManaitaPaxel::new);
-    public static final DeferredHolder<Item, PickaxeItem> MANAITA_PICKAXE = ITEMS.register("manaita_pickaxe", ToolManaitaPickaxe::new);
-    public static final DeferredHolder<Item, ShovelItem> MANAITA_SHOVEL = ITEMS.register("manaita_shovel", ToolManaitaShovel::new);
-    public static final DeferredHolder<Item, HoeItem> MANAITA_HOE = ITEMS.register("manaita_hoe", ToolManaitaHoe::new);
+    public static final DeferredItem<Item> CRUSHED_MANAITA = ITEMS.register("crushed_manaita", CrushedManaita::new);
+    public static final DeferredHolder<Item, AbstractManaitaToolItem> MANAITA_AXE = ITEMS.register("manaita_axe", ToolManaitaAxe::new);
+    public static final DeferredHolder<Item, AbstractManaitaToolItem> MANAITA_PAXEL = ITEMS.register("manaita_paxel", ToolManaitaPaxel::new);
+    public static final DeferredHolder<Item, AbstractManaitaToolItem> MANAITA_PICKAXE = ITEMS.register("manaita_pickaxe", ToolManaitaPickaxe::new);
+    public static final DeferredHolder<Item, AbstractManaitaToolItem> MANAITA_SHOVEL = ITEMS.register("manaita_shovel", ToolManaitaShovel::new);
+    public static final DeferredHolder<Item, AbstractManaitaToolItem> MANAITA_HOE = ITEMS.register("manaita_hoe", ToolManaitaHoe::new);
 
-    public static final DeferredHolder<Item, SwordItem> MANAITA_SWORD = ITEMS.register("manaita_sword", ToolManaitaSword::new);
+    public static final DeferredHolder<Item, AbstractManaitaToolItem> MANAITA_SWORD = ITEMS.register("manaita_sword", ToolManaitaSword::new);
     
     public static final DeferredHolder<Item, BowItem> MANAITA_BOW = ITEMS.register("manaita_bow", ManaitaBow::new);
 

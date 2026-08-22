@@ -50,34 +50,4 @@ public interface IDataAttachment {
     default boolean onAttackEntity(@NotNull Level level, @NotNull Player player, @NotNull Entity target) {
         return false;
     }
-
-    default <T> boolean equipmentChangeHelper(@NotNull Level level, @NotNull Entity interactEntity, ItemStack currentStack, ItemStack previousStack,
-                                              @NotNull DataComponentType<T> type, Consumer<Player> noDataToHasDataConsumer, Consumer<Player> hasDataToNoDataConsumer
-    ) {
-        if (!(interactEntity instanceof Player player)) {
-            return false;
-        }
-        if (level.isClientSide()) {
-            return false;
-        }
-        if (player.isCreative() || player.isSpectator()) {
-            return false;
-        }
-        // ManaitaFlyData (以後データと呼ぶ) が前後アイテムでそれぞれあるかチェック
-        boolean hasDataPrevious = previousStack.has(type);
-        boolean hasDataCurrent = currentStack.has(type);
-        if (!hasDataPrevious) {
-            if (hasDataCurrent) {
-                noDataToHasDataConsumer.accept(player);
-
-            }
-        }else {
-            if (!hasDataCurrent) {
-                hasDataToNoDataConsumer.accept(player);
-
-            }
-        }
-        // このイベントはキャンセルが発生しない
-        return false;
-    }
 }

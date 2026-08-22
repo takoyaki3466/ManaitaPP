@@ -1,9 +1,11 @@
 package com.takoy3466.manaitapp.item.tool;
 
-import net.minecraft.world.item.ShovelItem;
+import net.minecraft.tags.BlockTags;
 
-public class ToolManaitaShovel extends ShovelItem {
+public class ToolManaitaShovel extends AbstractManaitaToolItem {
     public ToolManaitaShovel() {
-        super(ManaitaToolTier.MANAITA_TIER, new Properties().fireResistant());
+        super(BlockTags.MINEABLE_WITH_HOE, new Properties().fireResistant());
     }
+
+
 }

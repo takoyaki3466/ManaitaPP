@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "123",
+    "4S ",
+    " S "
+  ],
+  "key": {
+    "1": {
+      "item": "manaitapp:manaita_axe"
+    },
+    "2": {
+      "item": "manaitapp:manaita_pickaxe"
+    },
+    "3": {
+      "item": "manaitapp:manaita_shovel"
+    },
+    "4": {
+      "item": "manaitapp:manaita_sword"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "manaitapp:manaita_paxel",
+    "count": 1
+  }
+}

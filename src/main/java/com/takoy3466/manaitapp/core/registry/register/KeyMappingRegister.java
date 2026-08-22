@@ -9,7 +9,7 @@ import java.util.List;
 public class KeyMappingRegister {
     private final String MOD_ID;
     private final String KEY_CATEGORIES;
-    private String KEY_NAME;
+
     public final static List<KeyMapping> entries = new ArrayList<>();
 
     public KeyMappingRegister(String modId) {
@@ -22,7 +22,7 @@ public class KeyMappingRegister {
     }
 
     public KeyMapping register(@NotNull String keyName, int key) {
-        this.KEY_NAME = "key." + MOD_ID + "."+ keyName;
+        String KEY_NAME = "key." + MOD_ID + "." + keyName;
         KeyMapping keyMapping = new KeyMapping(KEY_NAME, key, KEY_CATEGORIES);
         entries.add(keyMapping);
         return keyMapping;

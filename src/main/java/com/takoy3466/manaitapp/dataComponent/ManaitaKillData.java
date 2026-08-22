@@ -31,4 +31,11 @@ public class ManaitaKillData extends AbstractManaitaData<Boolean> implements IDa
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "ManaitaKillData{" +
+                "tMsg=" + tMsg +
+                '}';
+    }
 }

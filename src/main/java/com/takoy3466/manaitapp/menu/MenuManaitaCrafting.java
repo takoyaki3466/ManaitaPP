@@ -2,6 +2,8 @@ package com.takoy3466.manaitapp.menu;
 
 import com.takoy3466.manaitapp.core.interfaces.IMultiple;
 import com.takoy3466.manaitapp.core.ManaitaTier;
+import com.takoy3466.manaitapp.dataComponent.CrushedManaitaData;
+import com.takoy3466.manaitapp.item.CrushedManaita;
 import com.takoy3466.manaitapp.util.CraftingUtil;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -86,8 +88,8 @@ public class MenuManaitaCrafting extends RecipeBookMenu<CraftingInput, CraftingR
     @Override
     public void slotsChanged(@NotNull Container container) {
         this.access.execute((level, pos) -> {
-            if (this.multipleMatch((CraftingContainer) container)){
-                setItem(0,1, this.multipleAssemble((CraftingContainer) container, getMultiple()));
+            if (container instanceof CraftingContainer craftingContainer && this.multipleMatch(craftingContainer)){
+                setItem(0,1, this.multipleAssemble(craftingContainer, getMultiple() * CrushedManaita.MULTIPLE));
                 this.resultSlots.setChanged();
             } else {
                 slotChangedCraftingGrid(this, level, this.player, this.craftSlots.asCraftInput(), this.resultSlots);

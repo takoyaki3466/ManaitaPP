@@ -22,6 +22,7 @@ public class DataInit {
     public static DeferredHolder<DataComponentType<?>, DataComponentType<SpreadGrowData>> SPREAD_GROW_DATA = registerData("spread_grow_data", SpreadGrowData.CODEC, SpreadGrowData.STREAM_CODEC);
     public static DeferredHolder<DataComponentType<?>, DataComponentType<ManaitaFlyData>> FLY_DATA = registerData("manaita_fly_data", ManaitaFlyData.CODEC, ManaitaFlyData.STREAM_CODEC);
     public static DeferredHolder<DataComponentType<?>, DataComponentType<ManaitaKillData>> KILL_DATA = registerData("manaita_kill_data", ManaitaKillData.CODEC, ManaitaKillData.STREAM_CODEC);
+    public static DeferredHolder<DataComponentType<?>, DataComponentType<InstantAllDropBlockData>> INSTANT_BLOCK_DATA = registerData("instant_all_drop_block_data", InstantAllDropBlockData.CODEC, InstantAllDropBlockData.STREAM_CODEC);
 
     public static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> registerData(String name, Codec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec) {
         return DATA_COMPONENT.register(name,

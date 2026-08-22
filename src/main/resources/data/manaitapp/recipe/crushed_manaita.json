@@ -1,3 +1,12 @@
 {
-  "type": "manaitapp:manaita_recipe"
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "manaitapp:manaita_mtk"
+  },
+  "result": {
+    "id": "manaitapp:crushed_manaita",
+    "count": 1
+  },
+  "experience": 0,
+  "cookingtime": 1
 }

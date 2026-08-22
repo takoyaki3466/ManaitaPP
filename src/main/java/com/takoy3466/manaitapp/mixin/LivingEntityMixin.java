@@ -130,8 +130,8 @@ public abstract class LivingEntityMixin implements IManaitaType {
             ItemStack stack = self.getItemBySlot(slot);
             InvincibleData data = stack.get(DataInit.INVINCIBLE_DATA);
             if (data != null) {
-                data.setMsg(true);
                 self.getEntityData().set(MANAITA, data.getMsg());
+                break;
             }
         }
     }

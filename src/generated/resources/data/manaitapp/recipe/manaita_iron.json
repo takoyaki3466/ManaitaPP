@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
+  "category": "misc",
   "key": {
     "#": {
       "item": "minecraft:iron_ingot"
@@ -10,7 +10,9 @@
     }
   },
   "pattern": [
-    "###CCC###"
+    "###",
+    "CCC",
+    "###"
   ],
   "result": {
     "count": 1,

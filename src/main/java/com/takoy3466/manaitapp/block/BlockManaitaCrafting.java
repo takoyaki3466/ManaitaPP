@@ -3,8 +3,11 @@ package com.takoy3466.manaitapp.block;
 import com.takoy3466.manaitapp.block.abstracts.AbstractBlockMultiple;
 import com.takoy3466.manaitapp.core.ManaitaTier;
 import com.takoy3466.manaitapp.core.interfaces.IIgnoreItemUse;
+import com.takoy3466.manaitapp.dataComponent.helper.DataHelper;
+import com.takoy3466.manaitapp.init.ManaitaTiers;
 import com.takoy3466.manaitapp.menu.MenuManaitaCrafting;
 import com.takoy3466.manaitapp.util.ManaitaShapeUtil;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -17,7 +20,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -31,6 +36,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class BlockManaitaCrafting extends AbstractBlockMultiple implements IIgnoreItemUse {
     public static final DirectionProperty FACING = DirectionalBlock.FACING;
@@ -99,5 +106,15 @@ public class BlockManaitaCrafting extends AbstractBlockMultiple implements IIgno
                 return new MenuManaitaCrafting(id, inventory, ContainerLevelAccess.create(level, pos), getManaitaTier(), blockManaitaCrafting);
             }
         };
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        if (getManaitaTier() == ManaitaTiers.WOOD) {
+            tooltipComponents.add(Component.translatable("block.manaitapp.manaita_wood.hover_text").withStyle(ChatFormatting.GRAY));
+        } else if (getManaitaTier() == ManaitaTiers.MTK) {
+            tooltipComponents.add(Component.translatable("block.manaitapp.manaita_mtk.hover_text").withStyle(ChatFormatting.GRAY));
+        }
     }
 }

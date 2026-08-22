@@ -25,7 +25,6 @@ public class Manaitapp {
         TabsInit.TABS.register(bus);
         DataInit.DATA_COMPONENT.register(bus);
         SerializersInit.SERIALIZERS.register(bus);
-        AttachmentsInit.ATTACHMENTS.register(bus);
 
     }
 }

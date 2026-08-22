@@ -28,6 +28,37 @@
   "item.manaitapp.manaita_leggings": "manaita leggings",
   "item.manaitapp.manaita_boots": "manaita boots",
 
+  "item.manaitapp.manaita_origin.hover_text": "Let's put it on the cutting board!",
+  "item.manaitapp.crushed_manaita.hover_text": "quite powdery powder",
+
+  "item.manaitapp.manaita_hoe.hover_text": "Growth range",
+  "item.manaitapp.manaita_axe.hover_text": "Shift right click to restore the peeled wood!!",
+  "item.manaitapp.manaita_paxel.hover_text": "Mining range",
+  "item.manaitapp.manaita_pickaxe.hover_text": "Mining range",
+  "item.manaitapp.manaita_sword.hover_text": "Current mode",
+  "item.manaitapp.manaita_helmet.hover_text": "FlightSpeed",
+  "item.manaitapp.manaita_helmet.hover_text_1": "Night vision / invisibility / speed increase",
+
+  "block.manaitapp.manaita_furnace_wood.hover_text": "It's burning!",
+  "block.manaitapp.manaita_wood.hover_text": "This is quite a cutting board!",
+  "block.manaitapp.manaita_mtk.hover_text": "What is MTK?",
+
+  "misc.manaitapp.fly_speed.default": "DEFAULT",
+  "misc.manaitapp.fly_speed.low": "Level 1",
+  "misc.manaitapp.fly_speed.medium": "Level 2",
+  "misc.manaitapp.fly_speed.high": "Level 3",
+  "misc.manaitapp.fly_speed.extream": "Level 4",
+  "misc.manaitapp.fly_speed.omg": "Level 5",
+
+  "misc.manaitapp.invincible_data.message_text": "Manaita Mode",
+  "misc.manaitapp.fly_data.message_text": "CurrentSpeed",
+
+  "misc.manaitapp.all_data.data_true": "ON",
+  "misc.manaitapp.all_data.data_false": "OFF",
+
+  "gui.overlay.sword.all_die": "All entity annihilation mode",
+  "gui.overlay.sword.enemy_die": "Enemy annihilation mode",
+
   "gui.mtk_switcher_screen.first_title": "Move with ",
   "gui.mtk_switcher_screen.second_title": " or the wheel",
 
@@ -71,5 +102,12 @@
   "advancements.manaita_wood.description": "Let's make a wooden cutting board!",
 
   "advancements.root.title": "Manaita++",
-  "advancements.root.description": "Manaita++"
+  "advancements.root.description": "Manaita++",
+
+  "key.manaitapp.categories": "Manaita++",
+  "key.manaitapp.helmet_setting_key": "HelmetKey",
+  "key.manaitapp.fly_speed_setting_key": "SpeedChangeKey",
+  "key.manaitapp.mtk_switcher_open_key": "KeyToOpenSwitcher",
+  "key.manaitapp.mtk_switcher_select_key": "KeyToCloseSwitcher",
+  "key.manaitapp.mtk_switch_extermination": "SwordModeChangeKey"
 }
