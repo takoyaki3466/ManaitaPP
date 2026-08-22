@@ -37,7 +37,7 @@ import java.util.List;
 
 public class ManaitaBow extends BowItem {
     public ManaitaBow() {
-        super(new Properties().fireResistant().rarity(Rarity.EPIC));
+        super(new Properties().fireResistant().rarity(Rarity.UNCOMMON));
     }
 
     @Override

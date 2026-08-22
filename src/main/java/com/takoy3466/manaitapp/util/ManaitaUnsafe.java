@@ -52,13 +52,7 @@ public class ManaitaUnsafe {
             SynchedEntityData.DataItem<Float> healthDataItem = (SynchedEntityData.DataItem<Float>) getItemMethod.invoke(entityData, healthId);
 
             if (healthDataItem != null) {
-                // 3. 【超高速ロック】value フィールドの参照を、強制的に 20.0f のオブジェクトに固定
-                // 相手が 0.0f を書き込んだ直後であっても、ここで 20.0f に強制上書きされます
                 unsafe.putObject(healthDataItem, valueOffset, IMMUTABLE_HP);
-
-                // 4. 【ネットワーク遮断】dirty フラグを強制的に false に固定
-                // 相手が dirty=true にしてパケットを送ろうとしても、ここで false に戻すため、
-                // サーバーは「HPに変更はない」と判断し、周囲に死亡パケットが飛ばなくなります
                 unsafe.putBoolean(healthDataItem, dirtyOffset, false);
             }
 

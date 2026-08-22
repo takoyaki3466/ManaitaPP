@@ -2,7 +2,8 @@ package com.takoy3466.manaitapp.item.armor;
 
 import com.takoy3466.manaitapp.dataComponent.InvincibleData;
 import com.takoy3466.manaitapp.dataComponent.ManaitaFlyData;
-import com.takoy3466.manaitapp.dataComponent.helper.DataHoverHelper;
+import com.takoy3466.manaitapp.dataComponent.helper.DataHelper;
+import com.takoy3466.manaitapp.dataComponent.helper.ManaitaDataComponents;
 import com.takoy3466.manaitapp.init.DataInit;
 import com.takoy3466.manaitapp.util.ManaitaUnsafe;
 import net.minecraft.core.Holder;
@@ -40,7 +41,7 @@ public class ManaitaHelmet extends ArmorItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
-        tooltipComponents.add(DataHoverHelper.hoverDataText(stack, DataInit.FLY_DATA.get(), data -> ": " + data.getMsg()));
-        tooltipComponents.add(DataHoverHelper.hoverDataText(stack, DataInit.INVINCIBLE_DATA.get(), data -> ": " + data.getMsg()));
+        tooltipComponents.add(DataHelper.hoverDataText(stack, DataInit.FLY_DATA.get(), data -> ": " + data.getMsg().getComponent().getString()));
+        tooltipComponents.add(DataHelper.hoverDataText(stack, DataInit.INVINCIBLE_DATA.get(), data -> ": " + (data.getMsg() ? ManaitaDataComponents.TRUE_TEXT : ManaitaDataComponents.FALSE_TEXT).getString()));
     }
 }

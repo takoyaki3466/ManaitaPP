@@ -27,5 +27,7 @@ public class ClientEvent {
             return;
         }
         ManaitaEventHelper.attachmentExecute(player.getMainHandItem(), dataAttachment -> dataAttachment.onKeyDown(minecraft.level, minecraft.player, event.getKey(), event.getScanCode(), event.getAction()));
+
+        ManaitaEventHelper.attachmentEquipSlotExecute(player, dataAttachment -> dataAttachment.onKeyDown(minecraft.level, minecraft.player, event.getKey(), event.getScanCode(), event.getAction()));
     }
 }

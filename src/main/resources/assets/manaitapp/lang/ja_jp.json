@@ -28,11 +28,34 @@
   "item.manaitapp.manaita_leggings": "まな板のレギンス",
   "item.manaitapp.manaita_boots": "まな板のブーツ",
 
+  "item.manaitapp.manaita_origin.hover_text": "まな板にしょうぜ！",
+  "item.manaitapp.crushed_manaita.hover_text": "かなり粉な粉末",
+
   "item.manaitapp.manaita_hoe.hover_text": "成長範囲",
   "item.manaitapp.manaita_axe.hover_text": "シフト右クリックで剥げた木を元に戻せる!!",
   "item.manaitapp.manaita_paxel.hover_text": "採掘範囲",
   "item.manaitapp.manaita_pickaxe.hover_text": "採掘範囲",
   "item.manaitapp.manaita_sword.hover_text": "現在のモード",
+  "item.manaitapp.manaita_helmet.hover_text": "飛行速度",
+  "item.manaitapp.manaita_helmet.hover_text_1": "暗視・透明化・速度上昇",
+
+  "block.manaitapp.manaita_furnace_wood.hover_text": "燃えるぜ！",
+  "block.manaitapp.manaita_wood.hover_text": "かなりまな板だよコレ！",
+  "block.manaitapp.manaita_mtk.hover_text": "MTKってなんだよ！",
+
+  "misc.manaitapp.fly_speed.default": "デフォルト",
+  "misc.manaitapp.fly_speed.low": "レベル 1",
+  "misc.manaitapp.fly_speed.medium": "レベル 2",
+  "misc.manaitapp.fly_speed.high": "レベル 3",
+  "misc.manaitapp.fly_speed.extream": "レベル 4",
+  "misc.manaitapp.fly_speed.omg": "レベル 5",
+
+  "misc.manaitapp.invincible_data.message_text": "まな板モード",
+  "misc.manaitapp.fly_data.message_text": "現在の速度",
+
+  "misc.manaitapp.all_data.data_true": "オン",
+  "misc.manaitapp.all_data.data_false": "オフ",
+
 
   "gui.overlay.sword.all_die": "全エンティティ殲滅モード",
   "gui.overlay.sword.enemy_die": "敵殲滅モード",
@@ -64,7 +87,7 @@
   "advancements.manaita_mtk.title": "MTKって何？",
   "advancements.manaita_mtk.description": "MTKのまな板を作ろう！",
 
-  "advancements.manaita_origin.title": "まな板にしようぜ！",
+  "advancements.manaita_origin.title": "伝説の始まり",
   "advancements.manaita_origin.description": "まな板の素を原木から手に入れよう！",
 
   "advancements.manaita_paxel.title": "これ1つあれば他はゴミ！",
@@ -80,5 +103,12 @@
   "advancements.manaita_wood.description": "木のまな板を作ろう！",
   
   "advancements.root.title": "Manaita++",
-  "advancements.root.description": "Manaita++"
+  "advancements.root.description": "Manaita++",
+
+  "key.manaitapp.categories": "Manaita++",
+  "key.manaitapp.helmet_setting_key": "ヘルメットキー",
+  "key.manaitapp.fly_speed_setting_key": "速度変更キー",
+  "key.manaitapp.mtk_switcher_open_key": "スイッチャーを開くキー",
+  "key.manaitapp.mtk_switcher_select_key": "スイッチャーを閉じるキー",
+  "key.manaitapp.mtk_switch_extermination": "剣のモード変更キー"
 }

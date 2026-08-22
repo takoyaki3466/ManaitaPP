@@ -1,7 +1,9 @@
 package com.takoy3466.manaitapp.event;
 
 import com.takoy3466.manaitapp.Manaitapp;
+import com.takoy3466.manaitapp.init.DataInit;
 import com.takoy3466.manaitapp.init.ItemsInit;
+import com.takoy3466.manaitapp.util.ArmorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
@@ -14,12 +16,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @EventBusSubscriber(modid = Manaitapp.MOD_ID)
 public class ManaitaSubscribeEvent {
@@ -71,9 +76,9 @@ public class ManaitaSubscribeEvent {
     }
 
     @SubscribeEvent
-    public static void onEntityTickEvent(EntityTickEvent.Pre event) {
-        Entity entity = event.getEntity();
-        ManaitaEventHelper.attachmentExecute(entity, dataAttachment -> dataAttachment.onInvTick(entity.level(), entity));
+    public static void onPlayerTickEvent(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        ManaitaEventHelper.attachmentEquipSlotExecute(player, dataAttachment -> dataAttachment.onInvTick(player.level(), player));
     }
 
     @SubscribeEvent
@@ -93,28 +98,25 @@ public class ManaitaSubscribeEvent {
 
     @SubscribeEvent
     public static void onLivingDeathEvent(LivingDeathEvent event) {
-        event.setCanceled(ManaitaEventHelper.isCancelFromLiving(event.getEntity()));
+        event.setCanceled(ArmorUtil.playerEquipDataItem(event.getEntity(), DataInit.INVINCIBLE_DATA.get()));
     }
 
     @SubscribeEvent
     public static void onLivingIncomingDamageEvent(LivingIncomingDamageEvent event) {
-        event.setCanceled(ManaitaEventHelper.isCancelFromLiving(event.getEntity()));
+        event.setCanceled(ArmorUtil.playerEquipDataItem(event.getEntity(), DataInit.INVINCIBLE_DATA.get()));
     }
 
     @SubscribeEvent
     public static void onLivingKnockBackEvent(LivingKnockBackEvent event) {
-        event.setCanceled(ManaitaEventHelper.isCancelFromLiving(event.getEntity()));
+        event.setCanceled(ArmorUtil.playerEquipDataItem(event.getEntity(), DataInit.INVINCIBLE_DATA.get()));
     }
 
     @SubscribeEvent
     public static void onBlockDrops(BlockDropsEvent event) {
-
         if (event.getState().is(BlockTags.LOGS) && event.getTool().isEmpty()) {
-
             if (event.getLevel().getRandom().nextFloat() >= 0.8F) {
                 return;
             }
-
             event.getDrops().add(new ItemEntity(event.getLevel(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(ItemsInit.MANAITA_ORIGIN.get())));
         }
     }

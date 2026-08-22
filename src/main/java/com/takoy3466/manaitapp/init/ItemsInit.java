@@ -19,7 +19,7 @@ public class ItemsInit {
 
     public static final DeferredItem<Item> MANAITA_ORIGIN = ITEMS.register("manaita_origin", ManaitaOrigin::new);
 
-    public static final DeferredItem<Item> CRUSHED_MANAITA = ITEMS.register("crushed_mtk", CrushedManaita::new);
+    public static final DeferredItem<Item> CRUSHED_MANAITA = ITEMS.register("crushed_manaita", CrushedManaita::new);
     public static final DeferredHolder<Item, AxeItem> MANAITA_AXE = ITEMS.register("manaita_axe", ToolManaitaAxe::new);
     public static final DeferredHolder<Item, Item> MANAITA_PAXEL = ITEMS.register("manaita_paxel", ToolManaitaPaxel::new);
     public static final DeferredHolder<Item, PickaxeItem> MANAITA_PICKAXE = ITEMS.register("manaita_pickaxe", ToolManaitaPickaxe::new);
