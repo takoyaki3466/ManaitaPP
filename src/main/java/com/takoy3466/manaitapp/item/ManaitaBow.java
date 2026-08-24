@@ -1,38 +1,22 @@
 package com.takoy3466.manaitapp.item;
 
-import com.takoy3466.manaitapp.entity.EntityManaitaArrow;
-import com.takoy3466.manaitapp.init.EntitiesInit;
-import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.EventHooks;
-import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManaitaBow extends BowItem {
@@ -43,7 +27,7 @@ public class ManaitaBow extends BowItem {
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof Player player) {
-            ItemStack itemstack = player.getProjectile(stack);
+            ItemStack itemstack = new ItemStack(Items.ARROW);
             if (!itemstack.isEmpty()) {
                 int i = this.getUseDuration(stack, entityLiving) - timeLeft;
                 i = EventHooks.onArrowLoose(stack, level, player, i, !itemstack.isEmpty());
@@ -52,7 +36,7 @@ public class ManaitaBow extends BowItem {
                 }
 
                 float f = 1.0f;
-                List<ItemStack> list = draw(stack, itemstack, player);
+                List<ItemStack> list = this.drawOriginal(stack, itemstack, player);
                 if (level instanceof ServerLevel serverlevel) {
                     if (!list.isEmpty()) {
                         this.shoot(serverlevel, player, player.getUsedItemHand(), stack, list, f * 3.0F, 1.0F, true, null);
@@ -64,6 +48,42 @@ public class ManaitaBow extends BowItem {
             }
         }
 
+    }
+
+    protected List<ItemStack> drawOriginal(ItemStack weapon, ItemStack ammo, LivingEntity shooter) {
+        if (ammo.isEmpty()) {
+            return List.of();
+        } else {
+            Level level = shooter.level();
+            int projectileCount;
+            if (level instanceof ServerLevel serverlevel) {
+                projectileCount = EnchantmentHelper.processProjectileCount(serverlevel, weapon, shooter, 1);
+            } else {
+                projectileCount = 1;
+            }
+
+            int i = projectileCount;
+            List<ItemStack> list = new ArrayList<>(i);
+
+            for(int j = 0; j < i; ++j) {
+                ItemStack itemstack = ammo.copy();
+                if (!itemstack.isEmpty()) {
+                    list.add(itemstack);
+                }
+            }
+
+            return list;
+        }
+    }
+
+    @Override
+    protected @NotNull Projectile createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit) {
+        Projectile projectile = super.createProjectile(level, shooter, weapon, ammo, isCrit);
+        if (projectile instanceof AbstractArrow abstractArrow) {
+            abstractArrow.pickup = AbstractArrow.Pickup.DISALLOWED;
+        }
+
+        return projectile;
     }
 
     @Override

@@ -104,7 +104,7 @@
   "advancements.root.title": "Manaita++",
   "advancements.root.description": "Manaita++",
 
-  "key.manaitapp.categories": "Manaita++",
+  "key.categories.manaitapp": "Manaita++",
   "key.manaitapp.helmet_setting_key": "HelmetKey",
   "key.manaitapp.fly_speed_setting_key": "SpeedChangeKey",
   "key.manaitapp.mtk_switcher_open_key": "KeyToOpenSwitcher",

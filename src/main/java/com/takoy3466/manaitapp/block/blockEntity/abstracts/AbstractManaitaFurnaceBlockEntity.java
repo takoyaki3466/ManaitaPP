@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
@@ -89,7 +90,8 @@ public abstract class AbstractManaitaFurnaceBlockEntity extends BaseContainerBlo
 
     @Override
     protected @NotNull Component getDefaultName() {
-        return Component.literal("test");
+        MutableComponent base = Component.translatable("block.minecraft.furnace");
+        return Component.literal(base.getString() + " " + getMultiple() + "x" + getMultiple());
     }
 
     @Override

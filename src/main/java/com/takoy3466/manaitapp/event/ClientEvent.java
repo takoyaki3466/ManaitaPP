@@ -2,6 +2,7 @@ package com.takoy3466.manaitapp.event;
 
 import com.takoy3466.manaitapp.Manaitapp;
 import com.takoy3466.manaitapp.core.registry.register.KeyMappingRegister;
+import com.takoy3466.manaitapp.keyMapping.ManaitaKey;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.neoforged.api.distmarker.Dist;
@@ -15,7 +16,7 @@ public class ClientEvent {
 
     @SubscribeEvent
     public static void keyRegister(RegisterKeyMappingsEvent event) {
-        KeyMappingRegister.entries.forEach(event::register);
+        ManaitaKey.KEY.register(event);
     }
 
 

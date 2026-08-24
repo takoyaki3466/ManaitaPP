@@ -28,7 +28,6 @@ public class WeaponUtil {
             return;
         }
         lightning.wasOnFire = false;
-        kill(target, player);
         if (player instanceof ServerPlayer sPlayer) {
             lightning.moveTo(target.position());
             lightning.setCause(sPlayer);
@@ -36,7 +35,7 @@ public class WeaponUtil {
                 level.addFreshEntity(lightning);
             }
         }
-
+        kill(target, player);
     }
 
     public static void lightningStriker(List<LivingEntity> targets, Level level, Player player) {

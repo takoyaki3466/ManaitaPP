@@ -1,6 +1,7 @@
 package com.takoy3466.manaitapp.core.registry.register;
 
 import net.minecraft.client.KeyMapping;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -10,15 +11,19 @@ public class KeyMappingRegister {
     private final String MOD_ID;
     private final String KEY_CATEGORIES;
 
-    public final static List<KeyMapping> entries = new ArrayList<>();
+    private final List<KeyMapping> entries = new ArrayList<>();
 
     public KeyMappingRegister(String modId) {
         this.MOD_ID = modId;
-        this.KEY_CATEGORIES = "key." + modId + ".categories";
+        this.KEY_CATEGORIES = "key." +  "categories." + modId;
     }
 
     public static KeyMappingRegister create(String modId) {
         return new KeyMappingRegister(modId);
+    }
+
+    public void register(RegisterKeyMappingsEvent event) {
+        entries.forEach(event::register);
     }
 
     public KeyMapping register(@NotNull String keyName, int key) {
