@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "id": "manaitapp:manaita_origin"
+    },
+    "title": {
+      "translate": "advancements.manaita_origin.title"
+    },
+    "description": {
+      "translate": "advancements.manaita_origin.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "advancements_2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "manaitapp:manaita_origin"
+            ],
+            "count": {
+              "min": 1,
+              "max": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}
