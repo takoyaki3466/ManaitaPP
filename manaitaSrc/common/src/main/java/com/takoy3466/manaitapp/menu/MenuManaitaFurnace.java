@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class ManaitaFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, AbstractCookingRecipe> {
+public class MenuManaitaFurnace extends RecipeBookMenu<SingleRecipeInput, AbstractCookingRecipe> {
     private final ContainerData containerData;
     private final Level level;
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
@@ -29,11 +29,11 @@ public class ManaitaFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, Abstra
 
     public final AbstractManaitaFurnaceBlockEntity blockEntity;
 
-    public ManaitaFurnaceMenu(int id, Inventory playerInventory, FriendlyByteBuf buf) {
+    public MenuManaitaFurnace(int id, Inventory playerInventory, FriendlyByteBuf buf) {
         this(id, playerInventory, buf.readBlockPos());
     }
 
-    public ManaitaFurnaceMenu(int id, Inventory playerInventory, BlockPos pos) {
+    public MenuManaitaFurnace(int id, Inventory playerInventory, BlockPos pos) {
         super(MenuType.FURNACE, id);
         this.recipeType = RecipeType.SMELTING;
         this.recipeBookType = RecipeBookType.FURNACE;
@@ -59,6 +59,33 @@ public class ManaitaFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, Abstra
         }
 
         for(int i = 0; i < 9; ++i) {
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+        }
+
+        this.addDataSlots(containerData);
+    }
+
+    public MenuManaitaFurnace(int id, Inventory playerInventory, AbstractManaitaFurnaceBlockEntity blockEntity) {
+        super(MenuType.FURNACE, id);
+
+        this.recipeType = RecipeType.SMELTING;
+        this.recipeBookType = RecipeBookType.FURNACE;
+        this.level = playerInventory.player.level();
+
+        this.blockEntity = blockEntity;
+        this.containerData = blockEntity.dataAccess;
+
+        this.addSlot(new Slot(blockEntity, 0, 56, 17));
+        this.addSlot(new ManaitaFurnaceFuelSlot(this, blockEntity, 1, 56, 53));
+        this.addSlot(new FurnaceResultSlot(playerInventory.player, blockEntity, 2, 116, 35));
+
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 9; ++j) {
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+            }
+        }
+
+        for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
 

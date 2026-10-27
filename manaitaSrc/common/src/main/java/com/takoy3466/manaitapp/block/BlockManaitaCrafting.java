@@ -2,8 +2,8 @@ package com.takoy3466.manaitapp.block;
 
 import com.takoy3466.manaitapp.block.abstracts.AbstractBlockMultiple;
 import com.takoy3466.manaitapp.core.ManaitaTier;
+import com.takoy3466.manaitapp.core.interfaces.IHasDisplayComponent;
 import com.takoy3466.manaitapp.core.interfaces.IIgnoreItemUse;
-import com.takoy3466.manaitapp.dataComponent.helper.DataHelper;
 import com.takoy3466.manaitapp.init.ManaitaTiers;
 import com.takoy3466.manaitapp.menu.MenuManaitaCrafting;
 import com.takoy3466.manaitapp.util.ManaitaShapeUtil;
@@ -40,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BlockManaitaCrafting extends AbstractBlockMultiple implements IIgnoreItemUse {
+public class BlockManaitaCrafting extends AbstractBlockMultiple implements IIgnoreItemUse, IHasDisplayComponent {
     public static final DirectionProperty FACING = DirectionalBlock.FACING;
 
     public BlockManaitaCrafting(ManaitaTier manaitaTier) {
@@ -99,8 +99,7 @@ public class BlockManaitaCrafting extends AbstractBlockMultiple implements IIgno
         return new MenuProvider() {
             @Override
             public @NotNull Component getDisplayName() {
-                MutableComponent base = Component.translatable("block.minecraft.crafting_table");
-                return Component.literal(base.getString() + " " + getMultiple() + "x" + getMultiple());
+                return getDisplayComponent();
             }
 
             @Override
@@ -108,6 +107,12 @@ public class BlockManaitaCrafting extends AbstractBlockMultiple implements IIgno
                 return new MenuManaitaCrafting(id, inventory, ContainerLevelAccess.create(level, pos), getManaitaTier(), blockManaitaCrafting);
             }
         };
+    }
+
+    @Override
+    public Component getDisplayComponent() {
+        MutableComponent base = Component.translatable("block.minecraft.crafting_table");
+        return Component.literal(base.getString() + " " + getMultiple() + "x" + getMultiple());
     }
 
     @Override

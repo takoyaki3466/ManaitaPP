@@ -3,7 +3,7 @@ package com.takoy3466.manaitapp.block.blockEntity.abstracts;
 import com.takoy3466.manaitapp.core.ManaitaTier;
 import com.takoy3466.manaitapp.core.interfaces.IMultiple;
 import com.takoy3466.manaitapp.core.interfaces.ITickableBlockEntity;
-import com.takoy3466.manaitapp.menu.ManaitaFurnaceMenu;
+import com.takoy3466.manaitapp.menu.MenuManaitaFurnace;
 import com.takoy3466.manaitapp.core.platform.Services;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.*;
@@ -109,7 +109,7 @@ public abstract class AbstractManaitaFurnaceBlockEntity extends BaseContainerBlo
 
     @Override
     protected @NotNull AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory) {
-        return new ManaitaFurnaceMenu(id, inventory, getBlockPos());
+        return new MenuManaitaFurnace(id, inventory, getBlockPos());
     }
 
     @Override

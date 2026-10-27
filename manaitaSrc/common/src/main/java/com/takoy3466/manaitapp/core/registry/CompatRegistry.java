@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class CompatRegistry {
@@ -30,12 +31,12 @@ public class CompatRegistry {
         return compatHolder;
     }
 
-    public static <B extends Block> CompatDoubleHolder.BlockHolder<B> registerBlock(String id, Supplier<B> supplier, Item.Properties properties) {
+    public static <B extends Block, U extends BlockItem> CompatDoubleHolder.BlockHolder<B> registerBlock(String id, Supplier<B> blockSup, Function<B, U> itemFactory) {
         CompatHolder<B> blockHolder = CompatHolder.create(id);
         CompatHolder<BlockItem> itemHolder = CompatHolder.create(id);
         CompatTabs.ITEMS.add(itemHolder);
         CompatDoubleHolder.BlockHolder<B> doubleHolder = CompatDoubleHolder.BlockHolder.of(blockHolder, itemHolder);
-        Services.REGISTRY.registerBlock(doubleHolder, supplier, properties);
+        Services.REGISTRY.registerBlock(doubleHolder, blockSup, itemFactory);
         return doubleHolder;
     }
 

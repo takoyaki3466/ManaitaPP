@@ -2,7 +2,6 @@ package com.takoy3466.manaitapp.menu;
 
 import com.takoy3466.manaitapp.core.interfaces.IMultiple;
 import com.takoy3466.manaitapp.core.ManaitaTier;
-import com.takoy3466.manaitapp.dataComponent.CrushedManaitaData;
 import com.takoy3466.manaitapp.item.CrushedManaita;
 import com.takoy3466.manaitapp.util.CraftingUtil;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
@@ -171,7 +170,14 @@ public class MenuManaitaCrafting extends RecipeBookMenu<CraftingInput, CraftingR
     @Override
     public void removed(@NotNull Player player) {
         super.removed(player);
-        this.access.execute((level, pos) -> this.clearContainer(player, this.craftSlots));
+        this.access.execute((level, pos) -> {
+            for (int i = 0; i < craftSlots.getContainerSize(); i++) {
+                ItemStack stack = craftSlots.removeItemNoUpdate(i);
+                if (!stack.isEmpty()) {
+                    player.getInventory().placeItemBackInInventory(stack);
+                }
+            }
+        });
     }
 
     @Override

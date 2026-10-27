@@ -1,6 +1,6 @@
 package com.takoy3466.manaitapp.core.slot;
 
-import com.takoy3466.manaitapp.menu.ManaitaFurnaceMenu;
+import com.takoy3466.manaitapp.menu.MenuManaitaFurnace;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
@@ -17,7 +17,7 @@ public class ManaitaFurnaceFuelSlot extends Slot {
     }
 
     public boolean mayPlace(@NotNull ItemStack stack) {
-        if (menu instanceof ManaitaFurnaceMenu furnaceMenu) {
+        if (menu instanceof MenuManaitaFurnace furnaceMenu) {
             return furnaceMenu.isFuel(stack) || isBucket(stack);
         }else return false;
     }

@@ -7,7 +7,6 @@ import com.takoy3466.manaitapp.core.registry.holder.CompatHolder;
 import com.takoy3466.manaitapp.core.ManaitaTier;
 import com.takoy3466.manaitapp.core.interfaces.ManaitaBlockEntitySupplier;
 import com.takoy3466.manaitapp.core.platform.IRegistryPlatform;
-import com.takoy3466.manaitapp.init.CompatData;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -26,6 +25,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public final class NeoRegistryPlatform implements IRegistryPlatform {
@@ -53,9 +53,9 @@ public final class NeoRegistryPlatform implements IRegistryPlatform {
     }
 
     @Override
-    public <T extends Block> void registerBlock(CompatDoubleHolder.BlockHolder<T> doubleHolder, Supplier<T> supplier, Item.Properties properties) {
-        DeferredBlock<T> deferredBlock = BLOCKS.register(doubleHolder.getBlockHolder().getId(), supplier);
-        DeferredItem<BlockItem> deferredItem = ITEMS.register(doubleHolder.getItemHolder().getId(), () -> new BlockItem(deferredBlock.get(), properties));
+    public <T extends Block, U extends BlockItem> void registerBlock(CompatDoubleHolder.BlockHolder<T> doubleHolder, Supplier<T> blockSup, Function<T, U> itemFactory) {
+        DeferredBlock<T> deferredBlock = BLOCKS.register(doubleHolder.getBlockHolder().getId(), blockSup);
+        DeferredItem<BlockItem> deferredItem = ITEMS.register(doubleHolder.getItemHolder().getId(), () -> itemFactory.apply(deferredBlock.get()));
         doubleHolder.getBlockHolder().set(deferredBlock);
         doubleHolder.getItemHolder().set(deferredItem);
     }

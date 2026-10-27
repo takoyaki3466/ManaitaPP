@@ -2,6 +2,7 @@ package com.takoy3466.manaitapp.init;
 
 import com.takoy3466.manaitapp.block.BlockManaitaCrafting;
 import com.takoy3466.manaitapp.block.BlockManaitaFurnace;
+import com.takoy3466.manaitapp.block.ManaitaBlockItem;
 import com.takoy3466.manaitapp.block.abstracts.AbstractBlockManaitaFurnace;
 import com.takoy3466.manaitapp.core.registry.holder.CompatDoubleHolder;
 import com.takoy3466.manaitapp.core.registry.CompatRegistry;
@@ -27,11 +28,12 @@ public class CompatBlocks {
     public static final CompatDoubleHolder.BlockHolder<BlockManaitaFurnace.Mtk> MANAITA_FURNACE_MTK = registerFurnace(ManaitaTiers.MTK, BlockManaitaFurnace.Mtk::new);
 
     public static CompatDoubleHolder.BlockHolder<BlockManaitaCrafting> registerManaita(ManaitaTier manaitaTier) {
-        return CompatRegistry.registerBlock("manaita_" + manaitaTier.getName(), () -> new BlockManaitaCrafting(manaitaTier), new Item.Properties());
+        Supplier<BlockManaitaCrafting> blockSup = () -> new BlockManaitaCrafting(manaitaTier);
+        return CompatRegistry.registerBlock("manaita_" + manaitaTier.getName(), blockSup, block -> new ManaitaBlockItem(block, new Item.Properties()));
     }
 
-    public static <T extends AbstractBlockManaitaFurnace> CompatDoubleHolder.BlockHolder<T> registerFurnace(ManaitaTier manaitaTier, Supplier<T> sup) {
-        return CompatRegistry.registerBlock("manaita_furnace_" + manaitaTier.getName(), sup, new Item.Properties());
+    public static <T extends AbstractBlockManaitaFurnace> CompatDoubleHolder.BlockHolder<T> registerFurnace(ManaitaTier manaitaTier, Supplier<T> blockSup) {
+        return CompatRegistry.registerBlock("manaita_furnace_" + manaitaTier.getName(), blockSup, block -> new ManaitaBlockItem(block, new Item.Properties()));
     }
 
     public static void init() {

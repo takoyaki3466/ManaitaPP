@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class FabricRegistryPlatform implements IRegistryPlatform {
@@ -33,10 +34,10 @@ public class FabricRegistryPlatform implements IRegistryPlatform {
     }
 
     @Override
-    public <T extends Block> void registerBlock(CompatDoubleHolder.BlockHolder<T> doubleHolder, Supplier<T> supplier, Item.Properties properties) {
+    public <T extends Block, U extends BlockItem> void registerBlock(CompatDoubleHolder.BlockHolder<T> doubleHolder, Supplier<T> blockSup, Function<T, U> itemFactory) {
         Identifier identifier = new Identifier(ManaitaPPCommon.MOD_ID, doubleHolder.getBlockHolder().getId());
-        T registeredBlock = Registry.register(BuiltInRegistries.BLOCK, identifier.get(), supplier.get());
-        BlockItem registeredItem = Registry.register(BuiltInRegistries.ITEM, identifier.get(), new BlockItem(registeredBlock, properties));
+        T registeredBlock = Registry.register(BuiltInRegistries.BLOCK, identifier.get(), blockSup.get());
+        BlockItem registeredItem = Registry.register(BuiltInRegistries.ITEM, identifier.get(), itemFactory.apply(registeredBlock));
         doubleHolder.getBlockHolder().set(() -> registeredBlock);
         doubleHolder.getItemHolder().set(() -> registeredItem);
     }

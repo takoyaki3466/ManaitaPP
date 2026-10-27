@@ -24,6 +24,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ForgeRegistryPlatform implements IRegistryPlatform {
@@ -51,9 +52,9 @@ public class ForgeRegistryPlatform implements IRegistryPlatform {
     }
 
     @Override
-    public <T extends Block> void registerBlock(CompatDoubleHolder.BlockHolder<T> doubleHolder, Supplier<T> supplier, Item.Properties properties) {
-        RegistryObject<T> deferredBlock = BLOCKS.register(doubleHolder.getBlockHolder().getId(), supplier);
-        RegistryObject<BlockItem> deferredItem = ITEMS.register(doubleHolder.getItemHolder().getId(), () -> new BlockItem(deferredBlock.get(), properties));
+    public <T extends Block, U extends BlockItem> void registerBlock(CompatDoubleHolder.BlockHolder<T> doubleHolder, Supplier<T> blockSup, Function<T, U> itemFactory) {
+        RegistryObject<T> deferredBlock = BLOCKS.register(doubleHolder.getBlockHolder().getId(), blockSup);
+        RegistryObject<U> deferredItem = ITEMS.register(doubleHolder.getItemHolder().getId(), () -> itemFactory.apply(deferredBlock.get()));
         doubleHolder.getBlockHolder().set(deferredBlock);
         doubleHolder.getItemHolder().set(deferredItem);
     }
