@@ -13,15 +13,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 
 public class ManaitaHelmet extends ArmorItem {
 
-    public ManaitaHelmet() {
-        super(new Holder.Direct<>(ManaitaArmorMaterial.MANAITA_MATERIAL), Type.HELMET,
-                new Properties()
+    public ManaitaHelmet(Properties properties) {
+        super(ManaitaArmorMaterial.MANAITA_MATERIAL, ArmorType.HELMET,
+                properties
                         .component(CompatData.FLY_DATA.get(), new ManaitaFlyData(ManaitaFlyData.FlySpeed.DEFAULT))
                         .component(CompatData.INVINCIBLE_DATA.get(), new InvincibleData(true))
         );

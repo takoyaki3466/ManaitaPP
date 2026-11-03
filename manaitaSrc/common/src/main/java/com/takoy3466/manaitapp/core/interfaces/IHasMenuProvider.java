@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -40,16 +40,16 @@ public interface IHasMenuProvider<T extends AbstractContainerMenu> {
         return getMenuProvider(Component.literal(displayName), player.getItemInHand(hand));
     }
 
-    default InteractionResultHolder<ItemStack> openMenu(Level level, Player player, Component component, InteractionHand hand) {
+    default InteractionResult openMenu(Level level, Player player, Component component, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             serverPlayer.openMenu(this.getMenuProvider(component, stack));
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
-        return InteractionResultHolder.pass(stack);
+        return InteractionResult.PASS;
     }
 
-    default InteractionResultHolder<ItemStack> openMenu(Level level, Player player, String displayName, InteractionHand hand) {
+    default InteractionResult openMenu(Level level, Player player, String displayName, InteractionHand hand) {
         return this.openMenu(level, player, Component.literal(displayName), hand);
     }
 

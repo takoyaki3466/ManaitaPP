@@ -62,7 +62,7 @@ public final class NeoRegistryPlatform implements IRegistryPlatform {
 
     @Override
     public <T extends BlockEntity> void registerBlockEntityType(CompatHolder<BlockEntityType<T>> compatHolder, ManaitaBlockEntitySupplier<T> supplier, ManaitaTier tier, CompatDoubleHolder.BlockHolder<? extends Block> blockHolder) {
-        DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> deferredHolder = BLOCK_ENTITIES.register(compatHolder.getId(), () -> BlockEntityType.Builder.of((pos, state) -> supplier.create(pos, state, tier), blockHolder.getBlock()).build(null));
+        DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> deferredHolder = BLOCK_ENTITIES.register(compatHolder.getId(), () -> new BlockEntityType<>((pos, state) -> supplier.create(pos, state, tier), blockHolder.getBlock()));
         compatHolder.set(deferredHolder);
     }
 

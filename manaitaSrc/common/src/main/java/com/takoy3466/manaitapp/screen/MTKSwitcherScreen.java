@@ -7,6 +7,7 @@ import com.takoy3466.manaitapp.core.Identifier;
 import com.takoy3466.manaitapp.core.interfaces.IDataOperator;
 import com.takoy3466.manaitapp.init.CompatData;
 import com.takoy3466.manaitapp.keyMapping.ManaitaKey;
+import com.takoy3466.manaitapp.util.RenderUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.GameNarrator;
 import net.minecraft.client.Minecraft;
@@ -14,6 +15,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -47,7 +49,7 @@ public class MTKSwitcherScreen extends Screen implements IDataOperator {
         RenderSystem.enableBlend();
         int xInt = this.width / 2 - 62;
         int yInt = this.height / 2 - 31 - 27;
-        graphics.blit(MTK_SWITCHER_LOCATION.get(), xInt, yInt, 0.0F, 0.0F, 125, 76, 128, 128);
+        RenderUtil.blitGuiTexture(graphics, MTK_SWITCHER_LOCATION.get(), xInt, yInt, 0.0F, 0.0F, 125, 76, 128, 128);
         graphics.pose().popPose();
         super.render(graphics, x, y, f);
         if (this.currentlyMode != null) {
@@ -252,11 +254,11 @@ public class MTKSwitcherScreen extends Screen implements IDataOperator {
         }
 
         private void drawSlot(GuiGraphics graphics) {
-            graphics.blit(MTKSwitcherScreen.MTK_SWITCHER_LOCATION.get(), this.getX(), this.getY(), 0, 79, 26, 26, 128, 128);
+            RenderUtil.blitGuiTexture(graphics, MTKSwitcherScreen.MTK_SWITCHER_LOCATION.get(), this.getX(), this.getY(), 0, 79, 26, 26, 128, 128);
         }
 
         private void drawSelection(GuiGraphics graphics) {
-            graphics.blit(MTKSwitcherScreen.MTK_SWITCHER_LOCATION.get(), this.getX(), this.getY(), 26, 79, 26, 26, 128, 128);
+            RenderUtil.blitGuiTexture(graphics, MTKSwitcherScreen.MTK_SWITCHER_LOCATION.get(), this.getX(), this.getY(), 26, 79, 26, 26, 128, 128);
         }
     }
 }

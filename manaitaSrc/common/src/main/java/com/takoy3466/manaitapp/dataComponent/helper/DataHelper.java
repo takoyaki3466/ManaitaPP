@@ -14,7 +14,7 @@ public class DataHelper {
     public static <T, DATA extends AbstractManaitaData<T>> Component hoverDataText(ItemStack stack, DataComponentType<DATA> type, Function<DATA, String> anyText) {
         DATA manaitaData = stack.get(type);
         if (manaitaData != null) {
-            MutableComponent translatable = Component.translatable(stack.getDescriptionId() + ".hover_text");
+            MutableComponent translatable = Component.translatable(stack.getItem().getDescriptionId() + ".hover_text");
             return Component.literal(translatable.getString() + anyText.apply(manaitaData)).withStyle(ChatFormatting.GRAY);
         }
         return Component.empty();
@@ -23,7 +23,7 @@ public class DataHelper {
     public static <T, DATA extends AbstractManaitaData<T>> Component hoverDataText(ItemStack stack, DataComponentType<DATA> type, Function<DATA, String> anyText, int index) {
         DATA manaitaData = stack.get(type);
         if (manaitaData != null) {
-            MutableComponent translatable = Component.translatable(stack.getDescriptionId() + ".hover_text_" + index);
+            MutableComponent translatable = Component.translatable(stack.getItem().getDescriptionId() + ".hover_text_" + index);
             return Component.literal(translatable.getString() + anyText.apply(manaitaData)).withStyle(ChatFormatting.GRAY);
         }
         return Component.empty();

@@ -3,25 +3,18 @@ package com.takoy3466.manaitapp.platform;
 import com.takoy3466.manaitapp.core.platform.IUtilPlatform;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.EventHooks;
-import org.jetbrains.annotations.Nullable;
 
 public class NeoUtilPlatform implements IUtilPlatform {
     @Override
     public boolean hasCraftingRemainingItem(ItemStack stack) {
-        return stack.hasCraftingRemainingItem();
-    }
-
-    @Override
-    public int getBurnTime(ItemStack stack, @Nullable RecipeType<?> recipeType) {
-        return stack.getBurnTime(recipeType);
+        return !stack.getCraftingRemainder().isEmpty();
     }
 
     @Override
     public ItemStack getCraftingRemainingItem(ItemStack stack) {
-        return stack.getCraftingRemainingItem();
+        return stack.getCraftingRemainder();
     }
 
     @Override

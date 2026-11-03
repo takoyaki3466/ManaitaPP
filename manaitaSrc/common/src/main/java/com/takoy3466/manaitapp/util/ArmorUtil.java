@@ -3,6 +3,7 @@ package com.takoy3466.manaitapp.util;
 import com.takoy3466.manaitapp.dataComponent.AbstractManaitaData;
 import com.takoy3466.manaitapp.dataComponent.InvincibleData;
 import com.takoy3466.manaitapp.init.CompatData;
+import net.minecraft.Util;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -11,8 +12,13 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.trim.ArmorTrim;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 public class ArmorUtil {
 
@@ -61,6 +67,16 @@ public class ArmorUtil {
         }
 
         return hasData;
+    }
+
+    public static Map<ArmorType, Integer> getSimpleDefence(int armorDefence) {
+        return Util.make(new EnumMap<>(ArmorType.class), map -> {
+            map.put(ArmorType.HELMET, armorDefence);
+            map.put(ArmorType.CHESTPLATE, armorDefence);
+            map.put(ArmorType.LEGGINGS, armorDefence);
+            map.put(ArmorType.BOOTS, armorDefence);
+            map.put(ArmorType.BODY, armorDefence);
+        });
     }
 
 }

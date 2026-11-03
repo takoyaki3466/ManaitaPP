@@ -13,8 +13,8 @@ import java.util.List;
 public class CrushedManaita extends Item {
     public static int MULTIPLE = 64;
 
-    public CrushedManaita() {
-        super(new Item.Properties().component(CompatData.CRUSHED_DATA.get(), new CrushedManaitaData(MULTIPLE)));
+    public CrushedManaita(Properties properties) {
+        super(properties.component(CompatData.CRUSHED_DATA.get(), new CrushedManaitaData(MULTIPLE)));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.takoy3466.manaitapp.init;
 
+import com.takoy3466.manaitapp.ManaitaPPCommon;
 import com.takoy3466.manaitapp.block.BlockManaitaCrafting;
 import com.takoy3466.manaitapp.block.BlockManaitaFurnace;
 import com.takoy3466.manaitapp.block.ManaitaBlockItem;
@@ -7,8 +8,14 @@ import com.takoy3466.manaitapp.block.abstracts.AbstractBlockManaitaFurnace;
 import com.takoy3466.manaitapp.core.registry.holder.CompatDoubleHolder;
 import com.takoy3466.manaitapp.core.registry.CompatRegistry;
 import com.takoy3466.manaitapp.core.ManaitaTier;
+import com.takoy3466.manaitapp.core.registry.holder.CompatHolder;
+import com.takoy3466.manaitapp.util.RegistryUtil;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class CompatBlocks {
@@ -28,12 +35,23 @@ public class CompatBlocks {
     public static final CompatDoubleHolder.BlockHolder<BlockManaitaFurnace.Mtk> MANAITA_FURNACE_MTK = registerFurnace(ManaitaTiers.MTK, BlockManaitaFurnace.Mtk::new);
 
     public static CompatDoubleHolder.BlockHolder<BlockManaitaCrafting> registerManaita(ManaitaTier manaitaTier) {
-        Supplier<BlockManaitaCrafting> blockSup = () -> new BlockManaitaCrafting(manaitaTier);
-        return CompatRegistry.registerBlock("manaita_" + manaitaTier.getName(), blockSup, block -> new ManaitaBlockItem(block, new Item.Properties()));
+        String name = "manaita_" + manaitaTier.getName();
+        ResourceKey<Block> blockId = RegistryUtil.getBlockId(ManaitaPPCommon.MOD_ID, name);
+        ResourceKey<Item> itemId = RegistryUtil.getItemId(ManaitaPPCommon.MOD_ID, name);
+        return CompatRegistry.registerBlock(name, () -> new BlockManaitaCrafting(BlockBehaviour.Properties.of().setId(blockId), manaitaTier), block -> new ManaitaBlockItem(block, new Item.Properties().setId(itemId)));
     }
 
-    public static <T extends AbstractBlockManaitaFurnace> CompatDoubleHolder.BlockHolder<T> registerFurnace(ManaitaTier manaitaTier, Supplier<T> blockSup) {
-        return CompatRegistry.registerBlock("manaita_furnace_" + manaitaTier.getName(), blockSup, block -> new ManaitaBlockItem(block, new Item.Properties()));
+    public static <T extends AbstractBlockManaitaFurnace> CompatDoubleHolder.BlockHolder<T> registerFurnace(ManaitaTier manaitaTier, Function<BlockBehaviour.Properties, T> function) {
+        String name = "manaita_furnace_" + manaitaTier.getName();
+        ResourceKey<Block> blockId = RegistryUtil.getBlockId(ManaitaPPCommon.MOD_ID, name);
+        ResourceKey<Item> itemId = RegistryUtil.getItemId(ManaitaPPCommon.MOD_ID, name);
+        return CompatRegistry.registerBlock(name, () -> function.apply(BlockBehaviour.Properties.of().setId(blockId)), block -> new ManaitaBlockItem(block, new Item.Properties().setId(itemId)));
+    }
+
+    public static <T extends Block> CompatDoubleHolder.BlockHolder<T> register(String name, Function<BlockBehaviour.Properties, T> function) {
+        ResourceKey<Block> blockId = RegistryUtil.getBlockId(ManaitaPPCommon.MOD_ID, name);
+        ResourceKey<Item> itemId = RegistryUtil.getItemId(ManaitaPPCommon.MOD_ID, name);
+        return CompatRegistry.registerBlock(name, () -> function.apply(BlockBehaviour.Properties.of().setId(blockId)), block -> new ManaitaBlockItem(block, new Item.Properties().setId(itemId)));
     }
 
     public static void init() {

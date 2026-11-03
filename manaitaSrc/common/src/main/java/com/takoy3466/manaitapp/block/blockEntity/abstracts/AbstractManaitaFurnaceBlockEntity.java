@@ -10,13 +10,15 @@ import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.StackedContents;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
@@ -28,6 +30,7 @@ import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.FuelValues;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -93,8 +96,8 @@ public abstract class AbstractManaitaFurnaceBlockEntity extends BaseContainerBlo
         return Services.UTIL.hasCraftingRemainingItem(stack);
     }
 
-    private static int getBurnTime(@NotNull ItemStack stack, RecipeType<?> recipeType) {
-        return Services.UTIL.getBurnTime(stack, recipeType);
+    private static int getBurnTime(@NotNull FuelValues fuelValues, @NotNull ItemStack stack) {
+        return fuelValues.burnDuration(stack);
     }
 
     private ItemStack getCraftingRemainingItem(ItemStack stack) {
@@ -108,7 +111,7 @@ public abstract class AbstractManaitaFurnaceBlockEntity extends BaseContainerBlo
     }
 
     @Override
-    protected @NotNull AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory) {
+    protected @NotNull MenuManaitaFurnace createMenu(int id, @NotNull Inventory inventory) {
         return new MenuManaitaFurnace(id, inventory, getBlockPos());
     }
 
@@ -133,10 +136,10 @@ public abstract class AbstractManaitaFurnaceBlockEntity extends BaseContainerBlo
         boolean flag3 = !stack.isEmpty();
         if (isLit() || flag3 && flag2) {
             RecipeHolder<?> recipeholder;
-            if (flag2) {
-
+            if (flag2 && level instanceof ServerLevel serverLevel) {
                 // レシピ取得
-                recipeholder = quickCheck.getRecipeFor(new SingleRecipeInput(stack1), level).orElse(null);
+                recipeholder = quickCheck.getRecipeFor(new SingleRecipeInput(stack1), serverLevel).orElse(null);
+
             } else {
                 recipeholder = null;
             }
@@ -292,15 +295,18 @@ public abstract class AbstractManaitaFurnaceBlockEntity extends BaseContainerBlo
             return true;
         } else {
             ItemStack itemstack = this.items.get(1);
-            return getBurnTime(stack, this.recipeType) > 0 || stack.is(Items.BUCKET) && !itemstack.is(Items.BUCKET);
+            if (level == null || level.isClientSide()) {
+                return false;
+            }
+            return getBurnTime(level.fuelValues(), stack) > 0 || stack.is(Items.BUCKET) && !itemstack.is(Items.BUCKET);
         }
     }
 
     @Override
     public void setRecipeUsed(@Nullable RecipeHolder<?> recipe) {
         if (recipe != null) {
-            ResourceLocation resourcelocation = recipe.id();
-            this.recipesUsed.addTo(resourcelocation, 1);
+            ResourceKey<Recipe<?>> id = recipe.id();
+            this.recipesUsed.addTo(id.location(), 1);
         }
 
     }
@@ -312,23 +318,21 @@ public abstract class AbstractManaitaFurnaceBlockEntity extends BaseContainerBlo
     }
 
     protected int getBurnDuration(ItemStack fuel) {
-        return fuel.isEmpty() ? 0 : getBurnTime(fuel, this.recipeType);
+        if (level == null || level.isClientSide()) {
+            return 1;
+        }
+        return fuel.isEmpty() ? 0 : getBurnTime(level.fuelValues(), fuel);
     }
 
     private int getTotalCookTime() {
         return 1;
     }
 
-    public static boolean isFuel(ItemStack stack) {
-        return getBurnTime(stack, null) > 0;
-    }
-
     @Override
-    public void fillStackedContents(@NotNull StackedContents helper) {
+    public void fillStackedContents(@NotNull StackedItemContents stackedItemContents) {
         for(ItemStack itemstack : this.items) {
-            helper.accountStack(itemstack);
+            stackedItemContents.accountStack(itemstack);
         }
-
     }
 
     @Override

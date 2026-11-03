@@ -14,8 +14,8 @@ import java.util.List;
 public class ToolManaitaHoe extends AbstractManaitaToolItem {
     public static int RADIUS = 10;
 
-    public ToolManaitaHoe() {
-        super(BlockTags.MINEABLE_WITH_HOE, new Properties()
+    public ToolManaitaHoe(Properties properties) {
+        super(BlockTags.MINEABLE_WITH_HOE, properties
                 .component(CompatData.SPREAD_GROW_DATA.get(), new SpreadGrowData(RADIUS))
                 .component(CompatData.TILL_SOIL_DATA.get(), new TillSoilData(true))
         );

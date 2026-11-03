@@ -10,8 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -21,10 +19,10 @@ import java.util.List;
 
 public class BlockManaitaFurnace {
     public static class Wood extends AbstractBlockManaitaFurnace {
-        public static MapCodec<? extends Wood> CODEC = simpleCodec(properties -> new Wood());
+        public static MapCodec<? extends Wood> CODEC = simpleCodec(Wood::new);
 
-        public Wood() {
-            super(ManaitaTiers.WOOD);
+        public Wood(Properties properties) {
+            super(properties, ManaitaTiers.WOOD);
         }
 
         @Override
@@ -45,10 +43,10 @@ public class BlockManaitaFurnace {
     }
 
     public static class Stone extends AbstractBlockManaitaFurnace {
-        public static MapCodec<? extends Stone> CODEC = simpleCodec(properties -> new Stone());
+        public static MapCodec<? extends Stone> CODEC = simpleCodec(Stone::new);
 
-        public Stone() {
-            super(ManaitaTiers.STONE);
+        public Stone(Properties properties) {
+           super(properties, ManaitaTiers.STONE);
         }
 
         @Override
@@ -63,10 +61,10 @@ public class BlockManaitaFurnace {
     }
 
     public static class Iron extends AbstractBlockManaitaFurnace {
-        public static MapCodec<? extends Iron> CODEC = simpleCodec(properties -> new Iron());
+        public static MapCodec<? extends Iron> CODEC = simpleCodec(Iron::new);
 
-        public Iron() {
-            super(ManaitaTiers.IRON);
+        public Iron(Properties properties) {
+           super(properties, ManaitaTiers.IRON);
         }
 
         @Override
@@ -81,10 +79,10 @@ public class BlockManaitaFurnace {
     }
 
     public static class Gold extends AbstractBlockManaitaFurnace {
-        public static MapCodec<? extends Gold> CODEC = simpleCodec(properties -> new Gold());
+        public static MapCodec<? extends Gold> CODEC = simpleCodec(Gold::new);
 
-        public Gold() {
-            super(ManaitaTiers.GOLD);
+        public Gold(Properties properties) {
+           super(properties, ManaitaTiers.GOLD);
         }
 
         @Override
@@ -99,10 +97,10 @@ public class BlockManaitaFurnace {
     }
 
     public static class Diamond extends AbstractBlockManaitaFurnace {
-        public static MapCodec<? extends Diamond> CODEC = simpleCodec(properties -> new Diamond());
+        public static MapCodec<? extends Diamond> CODEC = simpleCodec(Diamond::new);
 
-        public Diamond() {
-            super(ManaitaTiers.DIAMOND);
+        public Diamond(Properties properties) {
+           super(properties, ManaitaTiers.DIAMOND);
         }
 
         @Override
@@ -117,10 +115,10 @@ public class BlockManaitaFurnace {
     }
 
     public static class Mtk extends AbstractBlockManaitaFurnace {
-        public static MapCodec<? extends Mtk> CODEC = simpleCodec(properties -> new Mtk());
+        public static MapCodec<? extends Mtk> CODEC = simpleCodec(Mtk::new);
 
-        public Mtk() {
-            super(ManaitaTiers.MTK);
+        public Mtk(Properties properties) {
+           super(properties, ManaitaTiers.MTK);
         }
 
         @Override

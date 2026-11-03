@@ -24,6 +24,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -61,7 +62,7 @@ public class ForgeRegistryPlatform implements IRegistryPlatform {
 
     @Override
     public <T extends BlockEntity> void registerBlockEntityType(CompatHolder<BlockEntityType<T>> compatHolder, ManaitaBlockEntitySupplier<T> supplier, ManaitaTier tier, CompatDoubleHolder.BlockHolder<? extends Block> blockHolder) {
-        RegistryObject<BlockEntityType<T>> deferredHolder = BLOCK_ENTITIES.register(compatHolder.getId(), () -> BlockEntityType.Builder.of((pos, state) -> supplier.create(pos, state, tier), blockHolder.getBlock()).build(null));
+        RegistryObject<BlockEntityType<T>> deferredHolder = BLOCK_ENTITIES.register(compatHolder.getId(), () -> new BlockEntityType<>((pos, state) -> supplier.create(pos, state, tier), Set.of(blockHolder.getBlock())));
         compatHolder.set(deferredHolder);
     }
 

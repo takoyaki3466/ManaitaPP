@@ -17,8 +17,8 @@ public class ToolManaitaSword extends AbstractManaitaToolItem {
     public static final Component KILL_ALL = Component.translatable("gui.overlay.sword.all_die");
     public static final Component ONLY_ENEMY = Component.translatable("gui.overlay.sword.enemy_die");
 
-    public ToolManaitaSword() {
-        super(BlockTags.SWORD_EFFICIENT, new Item.Properties().fireResistant()
+    public ToolManaitaSword(Properties properties) {
+        super(BlockTags.SWORD_EFFICIENT, properties.fireResistant()
                 .component(CompatData.STRIKER_DATA.get(), new LightningStrikerData(false))
                 .rarity(Rarity.EPIC)
         );

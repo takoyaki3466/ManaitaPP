@@ -5,11 +5,13 @@ import com.takoy3466.manaitapp.core.ManaitaTier;
 import com.takoy3466.manaitapp.item.CrushedManaita;
 import com.takoy3466.manaitapp.util.CraftingUtil;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
@@ -23,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.Optional;
 
-public class MenuManaitaCrafting extends RecipeBookMenu<CraftingInput, CraftingRecipe> implements IMultiple {
+public class MenuManaitaCrafting extends RecipeBookMenu implements IMultiple {
     private final CraftingContainer craftSlots;
     private final ResultContainer resultSlots;
     private final ContainerLevelAccess access;
@@ -68,7 +70,7 @@ public class MenuManaitaCrafting extends RecipeBookMenu<CraftingInput, CraftingR
         if (optionalRecipe.isPresent()) {
             RecipeHolder<CraftingRecipe> recipeHolder = optionalRecipe.get();
 
-            if (resultContainer.setRecipeUsed(level, serverPlayer, recipeHolder)) {
+            if (resultContainer.setRecipeUsed(serverPlayer, recipeHolder)) {
                 CraftingRecipe recipe = recipeHolder.value();
                 ItemStack result = recipe.assemble(input, level.registryAccess());
 
@@ -157,11 +159,15 @@ public class MenuManaitaCrafting extends RecipeBookMenu<CraftingInput, CraftingR
     }
 
     @Override
-    public void fillCraftSlotsStackedContents(StackedContents itemHelper) {
-        this.craftSlots.fillStackedContents(itemHelper);
+    public @NotNull PostPlaceAction handlePlacement(boolean useMaxItems, boolean allowDroppingItemsToClear, RecipeHolder<?> recipe, ServerLevel serverLevel, Inventory inventory) {
+        return PostPlaceAction.NOTHING;
     }
 
     @Override
+    public void fillCraftSlotsStackedContents(StackedItemContents contents) {
+        this.craftSlots.fillStackedContents(contents);
+    }
+
     public void clearCraftingContent() {
         this.craftSlots.clearContent();
         this.resultSlots.clearContent();
@@ -180,27 +186,22 @@ public class MenuManaitaCrafting extends RecipeBookMenu<CraftingInput, CraftingR
         });
     }
 
-    @Override
     public boolean recipeMatches(RecipeHolder<CraftingRecipe> recipeHolder) {
         return recipeHolder.value().matches(this.craftSlots.asCraftInput(), this.player.level());
     }
 
-    @Override
     public int getResultSlotIndex() {
         return 0;
     }
 
-    @Override
     public int getGridWidth() {
         return this.craftSlots.getWidth();
     }
 
-    @Override
     public int getGridHeight() {
         return this.craftSlots.getHeight();
     }
 
-    @Override
     public int getSize() {
         return 10;
     }

@@ -8,6 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 public class ManaitaDamageSource extends DamageSource {
 
     public ManaitaDamageSource(LivingEntity livingEntity) {
-        super(livingEntity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(CompatDamageTypes.MANAITA), livingEntity);
+        super(livingEntity.level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(CompatDamageTypes.MANAITA), livingEntity);
     }
 }

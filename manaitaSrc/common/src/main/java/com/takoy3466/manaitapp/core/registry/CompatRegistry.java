@@ -71,5 +71,4 @@ public class CompatRegistry {
         CompatBlockEntities.init();
         CompatTabs.init();
     }
-
 }

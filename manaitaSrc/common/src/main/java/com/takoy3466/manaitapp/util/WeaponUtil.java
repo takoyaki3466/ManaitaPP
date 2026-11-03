@@ -17,11 +17,11 @@ public class WeaponUtil {
         if (level.isClientSide()) {
             return;
         }
-        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level);
+        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.EVENT);
         if (lightning == null) {
             return;
         }
-        lightning.wasOnFire = false;
+
         if (player instanceof ServerPlayer sPlayer) {
             lightning.moveTo(target.position());
             lightning.setCause(sPlayer);

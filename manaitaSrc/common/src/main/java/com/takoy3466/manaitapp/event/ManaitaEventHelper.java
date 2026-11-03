@@ -3,7 +3,6 @@ package com.takoy3466.manaitapp.event;
 import com.takoy3466.manaitapp.core.interfaces.IDataAttachment;
 import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -44,7 +43,7 @@ public class ManaitaEventHelper {
         return attachmentExecute(stack, func) ? InteractionResult.FAIL : InteractionResult.PASS;
     }
 
-    public static InteractionResultHolder<ItemStack> fabricHolderExecute(ItemStack stack, Function<IDataAttachment, Boolean> func) {
-        return attachmentExecute(stack, func) ? InteractionResultHolder.fail(stack) : InteractionResultHolder.pass(stack);
+    public static InteractionResult fabricHolderExecute(ItemStack stack, Function<IDataAttachment, Boolean> func) {
+        return attachmentExecute(stack, func) ? InteractionResult.FAIL : InteractionResult.PASS;
     }
 }

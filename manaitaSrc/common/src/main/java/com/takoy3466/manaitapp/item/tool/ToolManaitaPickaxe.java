@@ -12,8 +12,8 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class ToolManaitaPickaxe extends AbstractManaitaToolItem {
-    public ToolManaitaPickaxe() {
-        super(BlockTags.MINEABLE_WITH_PICKAXE, new Properties().fireResistant()
+    public ToolManaitaPickaxe(Properties properties) {
+        super(BlockTags.MINEABLE_WITH_PICKAXE, properties.fireResistant()
                 .component(CompatData.RANGE_BREAK_DATA.get(), new RangeBreakData(1))
                 .component(CompatData.INSTANT_BLOCK_DATA.get(), new InstantAllDropBlockData(true))
         );

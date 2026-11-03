@@ -1,7 +1,9 @@
 package com.takoy3466.manaitapp.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -9,8 +11,8 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class ManaitaOrigin extends Item {
-    public ManaitaOrigin() {
-        super(new Properties());
+    public ManaitaOrigin(Item.Properties properties) {
+        super(properties);
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.takoy3466.manaitapp.core.interfaces.IHasMenuProvider;
 import com.takoy3466.manaitapp.core.interfaces.IMultiple;
 import com.takoy3466.manaitapp.menu.MenuManaitaCrafting;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -20,9 +20,9 @@ public class ManaitaBlockItem extends BlockItem implements IHasMenuProvider<Menu
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         if (!(getBlock() instanceof IHasDisplayComponent displayBlock)) {
-            return InteractionResultHolder.pass(player.getItemInHand(usedHand));
+            return InteractionResult.PASS;
         }
         return this.openMenu(level, player, displayBlock.getDisplayComponent(), usedHand);
     }

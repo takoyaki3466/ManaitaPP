@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -36,18 +36,18 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractBlockManaitaFurnace extends BaseEntityBlock implements IMultiple {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-    public static final DirectionProperty FACING = DirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = DirectionalBlock.FACING;
     private final ManaitaTier manaitaTier;
 
-    protected AbstractBlockManaitaFurnace(ManaitaTier manaitaTier) {
-        super(Properties.of().noOcclusion());
+    protected AbstractBlockManaitaFurnace(Properties properties, ManaitaTier manaitaTier) {
+        super(properties.noOcclusion());
         this.manaitaTier = manaitaTier;
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 
 
 
-    protected abstract MapCodec<? extends AbstractBlockManaitaFurnace> codec();
+    protected abstract @NotNull MapCodec<? extends AbstractBlockManaitaFurnace> codec();
 
     // 今後書く
     @Override

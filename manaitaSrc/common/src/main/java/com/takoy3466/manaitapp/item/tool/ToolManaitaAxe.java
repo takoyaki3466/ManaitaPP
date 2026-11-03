@@ -12,8 +12,8 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class ToolManaitaAxe extends AbstractManaitaToolItem {
-    public ToolManaitaAxe() {
-        super(BlockTags.MINEABLE_WITH_AXE, new Properties().fireResistant()
+    public ToolManaitaAxe(Properties properties) {
+        super(BlockTags.MINEABLE_WITH_AXE, properties.fireResistant()
                 .component(CompatData.WOOD_REVERSE_DATA.get(), new WoodReverseData(true))
                 .component(CompatData.STRIP_WOOD_DATA.get(), new StripWoodData(true))
         );

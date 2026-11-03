@@ -189,7 +189,7 @@ public class ToolUtil {
                 level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, optional.get()));
                 itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 
-                return InteractionResult.sidedSuccess(level.isClientSide);
+                return InteractionResult.SUCCESS;
             }
         }
     }
@@ -244,7 +244,7 @@ public class ToolUtil {
                     }
                 }
 
-                return InteractionResult.sidedSuccess(level.isClientSide());
+                return InteractionResult.SUCCESS;
             } else {
                 return InteractionResult.PASS;
             }

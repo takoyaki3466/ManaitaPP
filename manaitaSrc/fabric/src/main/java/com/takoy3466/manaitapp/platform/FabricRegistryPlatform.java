@@ -8,6 +8,8 @@ import com.takoy3466.manaitapp.core.interfaces.ManaitaBlockEntitySupplier;
 import com.takoy3466.manaitapp.core.platform.IRegistryPlatform;
 import com.takoy3466.manaitapp.core.registry.holder.CompatDoubleHolder;
 import com.takoy3466.manaitapp.core.registry.holder.CompatHolder;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityType;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -45,7 +47,7 @@ public class FabricRegistryPlatform implements IRegistryPlatform {
     @Override
     public <T extends BlockEntity> void registerBlockEntityType(CompatHolder<BlockEntityType<T>> compatHolder, ManaitaBlockEntitySupplier<T> supplier, ManaitaTier tier, CompatDoubleHolder.BlockHolder<? extends Block> blockHolder) {
         Identifier identifier = new Identifier(ManaitaPPCommon.MOD_ID, compatHolder.getId());
-        BlockEntityType<T> registered = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, identifier.get(), BlockEntityType.Builder.of((pos, state) -> supplier.create(pos, state, tier), blockHolder.getBlock()).build(null));
+        BlockEntityType<T> registered = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, identifier.get(), FabricBlockEntityTypeBuilder.create((pos, state) -> supplier.create(pos, state, tier), blockHolder.getBlock()).build(null));
         compatHolder.set(() -> registered);
     }
 

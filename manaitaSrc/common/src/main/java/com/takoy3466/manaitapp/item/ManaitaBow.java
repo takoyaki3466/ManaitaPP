@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -20,19 +20,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManaitaBow extends BowItem {
-    public ManaitaBow() {
-        super(new Properties().fireResistant().rarity(Rarity.UNCOMMON));
+    public ManaitaBow(Properties properties) {
+        super(properties.fireResistant().rarity(Rarity.UNCOMMON));
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof Player player) {
             ItemStack itemstack = new ItemStack(Items.ARROW);
             if (!itemstack.isEmpty()) {
                 int i = this.getUseDuration(stack, entityLiving) - timeLeft;
                 i = Services.UTIL.onArrowLoose(stack, level, player, i, !itemstack.isEmpty());
                 if (i < 0) {
-                    return;
+                    return false;
                 }
 
                 float f = 1.0f;
@@ -48,6 +48,7 @@ public class ManaitaBow extends BowItem {
             }
         }
 
+        return true;
     }
 
     protected List<ItemStack> drawOriginal(ItemStack weapon, ItemStack ammo, LivingEntity shooter) {
@@ -92,15 +93,14 @@ public class ManaitaBow extends BowItem {
     }
 
     @Override
-    public @NotNull UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BOW;
+    public @NotNull ItemUseAnimation getUseAnimation(ItemStack stack) {
+        return ItemUseAnimation.BOW;
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
         player.startUsingItem(hand);
-        return InteractionResultHolder.consume(stack);
+        return InteractionResult.CONSUME;
     }
 
     @Override

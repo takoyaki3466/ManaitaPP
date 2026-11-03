@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.event.player.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -46,7 +45,7 @@ public class ManaitaSubscribeEvent {
     public static void onRightClickEvent() {
         UseItemCallback.EVENT.register((player, level, hand) -> {
             if (level.isClientSide()) {
-                return InteractionResultHolder.pass(player.getItemInHand(hand));
+                return InteractionResult.PASS;
             }
             return ManaitaEventHelper.fabricHolderExecute(player.getItemInHand(hand), dataAttachment -> dataAttachment.onRightClickItem(level, player.blockPosition(), player, hand));
         });

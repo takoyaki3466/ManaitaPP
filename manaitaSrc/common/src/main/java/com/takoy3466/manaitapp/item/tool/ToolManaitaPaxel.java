@@ -19,8 +19,8 @@ import java.util.List;
 public class ToolManaitaPaxel extends AbstractManaitaToolItem {
 
 
-    public ToolManaitaPaxel() {
-        super(BlockTags.MINEABLE_WITH_PICKAXE, new Item.Properties().fireResistant()
+    public ToolManaitaPaxel(Properties properties) {
+        super(BlockTags.MINEABLE_WITH_PICKAXE, properties.fireResistant()
                 .component(CompatData.RANGE_BREAK_DATA.get(), new RangeBreakData(1))
                 .component(CompatData.KILL_DATA.get(), new ManaitaKillData(true))
                 .component(CompatData.INSTANT_BLOCK_DATA.get(), new InstantAllDropBlockData(true))

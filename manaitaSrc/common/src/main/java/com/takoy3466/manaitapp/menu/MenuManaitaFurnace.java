@@ -5,23 +5,23 @@ import com.takoy3466.manaitapp.core.platform.Services;
 import com.takoy3466.manaitapp.core.slot.ManaitaFurnaceFuelSlot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.FuelValues;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class MenuManaitaFurnace extends RecipeBookMenu<SingleRecipeInput, AbstractCookingRecipe> {
+public class MenuManaitaFurnace extends RecipeBookMenu {
     private final ContainerData containerData;
     private final Level level;
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
@@ -40,7 +40,7 @@ public class MenuManaitaFurnace extends RecipeBookMenu<SingleRecipeInput, Abstra
         this.level = playerInventory.player.level();
 
         BlockEntity be = this.level.getBlockEntity(pos);
-        if (be instanceof AbstractManaitaFurnaceBlockEntity furnaceBlockEntity){
+        if (be instanceof AbstractManaitaFurnaceBlockEntity furnaceBlockEntity) {
             this.blockEntity = furnaceBlockEntity;
         } else {
             throw new IllegalStateException(Objects.requireNonNull(be).getClass().getCanonicalName() + "と ManaitaFurnaceBlockEntity クラスは違うよ！");
@@ -52,13 +52,13 @@ public class MenuManaitaFurnace extends RecipeBookMenu<SingleRecipeInput, Abstra
         this.addSlot(new ManaitaFurnaceFuelSlot(this, blockEntity, 1, 56, 53));
         this.addSlot(new FurnaceResultSlot(playerInventory.player, blockEntity, 2, 116, 35));
 
-        for(int i = 0; i < 3; ++i) {
-            for(int j = 0; j < 9; ++j) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
-        for(int i = 0; i < 9; ++i) {
+        for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
 
@@ -93,24 +93,24 @@ public class MenuManaitaFurnace extends RecipeBookMenu<SingleRecipeInput, Abstra
     }
 
     public boolean isFuel(ItemStack stack) {
-        return Services.UTIL.getBurnTime(stack, this.recipeType) > 0;
+        return level.fuelValues().isFuel(stack);
     }
 
     @Override
-    public void fillCraftSlotsStackedContents(@NotNull StackedContents stackedContents) {
+    public void fillCraftSlotsStackedContents(@NotNull StackedItemContents contents) {
         if (this.blockEntity != null) {
-            this.blockEntity.fillStackedContents(stackedContents);
+            this.blockEntity.fillStackedContents(contents);
         }
+    }
+
+    @Override
+    public @NotNull PostPlaceAction handlePlacement(boolean useMaxItems, boolean allowDroppingItemsToClear, RecipeHolder<?> recipe, ServerLevel serverLevel, Inventory inventory) {
+        return PostPlaceAction.NOTHING;
     }
 
     public void clearCraftingContent() {
         this.getSlot(0).set(ItemStack.EMPTY);
         this.getSlot(2).set(ItemStack.EMPTY);
-    }
-
-    @Override
-    public boolean recipeMatches(@NotNull RecipeHolder<AbstractCookingRecipe> recipeHolder) {
-        return recipeHolder.value().matches(new SingleRecipeInput(this.blockEntity.getItem(0)), this.level);
     }
 
     public int getResultSlotIndex() {
@@ -179,13 +179,16 @@ public class MenuManaitaFurnace extends RecipeBookMenu<SingleRecipeInput, Abstra
     }
 
     protected boolean canSmelt(ItemStack stack) {
-        return this.level.getRecipeManager().getRecipeFor(this.recipeType, new SingleRecipeInput(stack), this.level).isPresent();
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return false;
+        }
+        return serverLevel.getServer().getRecipeManager().getRecipeFor(this.recipeType, new SingleRecipeInput(stack), this.level).isPresent();
     }
 
     public float getBurnProgress() {
         int i = this.containerData.get(2);
         int j = this.containerData.get(3);
-        return j != 0 && i != 0 ? Mth.clamp((float)i / (float)j, 0.0F, 1.0F) : 0.0F;
+        return j != 0 && i != 0 ? Mth.clamp((float) i / (float) j, 0.0F, 1.0F) : 0.0F;
     }
 
     public float getLitProgress() {
@@ -194,14 +197,14 @@ public class MenuManaitaFurnace extends RecipeBookMenu<SingleRecipeInput, Abstra
             i = 200;
         }
 
-        return Mth.clamp((float)this.containerData.get(0) / (float)i, 0.0F, 1.0F);
+        return Mth.clamp((float) this.containerData.get(0) / (float) i, 0.0F, 1.0F);
     }
 
     public boolean isLit() {
         return this.containerData.get(0) > 0;
     }
 
-    public RecipeBookType getRecipeBookType() {
+    public @NotNull RecipeBookType getRecipeBookType() {
         return this.recipeBookType;
     }
 
